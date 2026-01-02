@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Chakana Brand - Light Mode */
+    --background: 40 33% 98%;
+    --foreground: 30 20% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 30 20% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 20% 15%;
+
+    /* Primary: Earth Brown */
+    --primary: 30 40% 47%;
+    --primary-foreground: 40 33% 98%;
+
+    /* Secondary: Sage Green */
+    --secondary: 85 80% 36%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Accent: Inca Gold */
+    --accent: 48 96% 53%;
+    --accent-foreground: 30 20% 15%;
+
+    --muted: 40 20% 94%;
+    --muted-foreground: 30 10% 45%;
+
+    /* Destructive: Terracotta */
+    --destructive: 21 90% 40%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 20% 85%;
+    --input: 30 20% 85%;
+    --ring: 30 40% 47%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Chakana Brand - Dark Mode */
+    --background: 30 15% 10%;
+    --foreground: 40 20% 95%;
+
+    --card: 30 15% 13%;
+    --card-foreground: 40 20% 95%;
+
+    --popover: 30 15% 13%;
+    --popover-foreground: 40 20% 95%;
+
+    /* Primary: Earth Brown (lighter for dark) */
+    --primary: 30 50% 55%;
+    --primary-foreground: 30 15% 10%;
+
+    /* Secondary: Sage Green */
+    --secondary: 85 70% 45%;
+    --secondary-foreground: 30 15% 10%;
+
+    /* Accent: Inca Gold */
+    --accent: 48 90% 50%;
+    --accent-foreground: 30 15% 10%;
+
+    --muted: 30 15% 18%;
+    --muted-foreground: 40 10% 60%;
+
+    /* Destructive: Terracotta */
+    --destructive: 21 80% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 15% 22%;
+    --input: 30 15% 22%;
+    --ring: 30 50% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h1, h2, h3 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  /* Navigation Rail */
+  .nav-rail {
+    @apply fixed left-0 top-0 h-full w-[72px] bg-chakana-earth flex flex-col items-center py-4 z-50;
+  }
+
+  .nav-rail-item {
+    @apply w-12 h-12 rounded-xl flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200 cursor-pointer mb-2;
+  }
+
+  .nav-rail-item.active {
+    @apply bg-chakana-gold text-chakana-earth-dark;
+  }
+
+  /* Cards */
+  .chakana-card {
+    @apply bg-card rounded-lg border border-border shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+
+  /* Status Badges */
+  .badge-success {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-chakana-sage/20 text-chakana-sage;
+  }
+
+  .badge-warning {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-chakana-gold/20 text-chakana-gold-dark;
+  }
+
+  .badge-danger {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-chakana-terracotta/20 text-chakana-terracotta;
+  }
+
+  .badge-info {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-chakana-sky/20 text-chakana-sky;
+  }
+}
+
+/* Prose styling for markdown content */
+.prose-chakana {
+  @apply prose prose-stone dark:prose-invert max-w-none;
+}
+
+.prose-chakana h1 {
+  @apply font-display text-chakana-earth dark:text-chakana-earth-light;
+}
+
+.prose-chakana h2 {
+  @apply font-display text-chakana-earth-dark dark:text-chakana-earth;
+}
+
+.prose-chakana a {
+  @apply text-chakana-sky hover:text-chakana-sky/80;
+}
+
+.prose-chakana strong {
+  @apply text-chakana-earth dark:text-chakana-gold;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-chakana-earth/30 rounded-full hover:bg-chakana-earth/50;
+}

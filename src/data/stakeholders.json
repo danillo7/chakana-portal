@@ -1,0 +1,64 @@
+[
+  {
+    "id": "ivan-silva",
+    "name": "Iván Silva",
+    "role": "Fundador & CEO",
+    "company": "Chakana La Experiencia",
+    "email": "chakanale@gmail.com",
+    "location": "Valencia, España",
+    "bio": "Fundador de Chakana La Experiencia. Especialista en desarrollo personal con metodología única que combina neurociencia, espiritualidad práctica y coaching de alto rendimiento. +300 personas transformadas en retiros.",
+    "expertise": ["Desarrollo Personal", "Neurociencia", "Coaching", "Liderazgo", "Retiros Transformacionales"],
+    "projects": ["chakana-la-experiencia", "casa-chakana", "fundacion-cooper"],
+    "socialLinks": {
+      "instagram": "https://instagram.com/chakana.laexperiencia"
+    }
+  },
+  {
+    "id": "danillo-costa",
+    "name": "Dr. Danillo Costa",
+    "role": "Asesor Estratégico & Legal",
+    "company": "Costa Law / CLA Digital / AI Spot",
+    "email": "danillo@costalaw.com.br",
+    "location": "Castellón, España / Brasil",
+    "bio": "Abogado especializado en derecho empresarial y tributario internacional. CEO de CLA Digital y AI Spot. Experto en estructuración de negocios, compliance y tecnología aplicada al sector legal.",
+    "expertise": ["Derecho Empresarial", "Tributación Internacional", "Legal Tech", "AI", "Estructuración Societaria"],
+    "projects": ["chakana-la-experiencia", "casa-chakana"],
+    "socialLinks": {
+      "linkedin": "https://linkedin.com/in/danillocosta",
+      "website": "https://costalaw.com.br"
+    }
+  },
+  {
+    "id": "ernesto",
+    "name": "Ernesto",
+    "role": "Inversor Principal",
+    "company": "Holding Inmobiliario (4 empresas)",
+    "location": "Barcelona, España",
+    "bio": "Inversor con holding de 4 empresas del sector inmobiliario. Interesado en diversificar hacia sector de formación y desarrollo personal. Capital disponible: €100.000 para nueva SL.",
+    "expertise": ["Inversión", "Inmobiliario", "Gestión Empresarial", "Finanzas"],
+    "projects": ["chakana-la-experiencia"]
+  },
+  {
+    "id": "ferran",
+    "name": "Ferran",
+    "role": "Potencial Colaborador",
+    "company": "Especialista Inmobiliario",
+    "location": "Cataluña, España",
+    "bio": "Especialista en compra de apartamentos con okupas, negociación de salida, reforma y reventa. Facturación €6M en 2 años (solo Cataluña). Planes de expansión por toda España. Participó en retiro Chakana.",
+    "expertise": ["Inmobiliario", "Negociación", "Inversión", "Reforma"],
+    "projects": ["chakana-la-experiencia"]
+  },
+  {
+    "id": "iskra",
+    "name": "Iskra",
+    "role": "Colaboradora - Hotelería",
+    "company": "Triple H Restaurant & Hoteles",
+    "location": "Mallorca, España",
+    "bio": "Empresaria búlgara con negocios de hotelería en Mallorca. 3 restaurantes + hamburguería. Restaurante Triple H con temática de ursos de pelúcia. Facturación ~€1M anual. Organizó evento Chakana en sus instalaciones.",
+    "expertise": ["Hotelería", "Restauración", "Eventos", "Networking"],
+    "projects": ["chakana-la-experiencia"],
+    "socialLinks": {
+      "instagram": "https://instagram.com/tripleh.mallorca"
+    }
+  }
+]

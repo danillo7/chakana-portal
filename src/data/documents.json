@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ata-estrategica-2026-01-02",
+    "title": "Acta Estratégica - Reunión Inaugural",
+    "slug": "ata-estrategica-2026-01-02",
+    "category": "ata",
+    "contentPath": "/content/atas/ATA-ESTRATEGICA-2026-01-02.md",
+    "createdAt": "2026-01-02T10:00:00Z",
+    "updatedAt": "2026-01-02T18:00:00Z",
+    "project": "chakana-la-experiencia",
+    "tags": ["estrategia", "reunion", "alianza", "Q1-2026"],
+    "excerpt": "Primera reunión estratégica formal entre Dr. Danillo Costa y Iván Silva para establecer la alianza Chakana."
+  },
+  {
+    "id": "batepapo-ivan-26-12",
+    "title": "Bate-papo con Iván - Oportunidades",
+    "slug": "batepapo-ivan-26-12",
+    "category": "ata",
+    "contentPath": "/content/atas/Bate-Papo-Ivan-26-12-2025.md",
+    "createdAt": "2025-12-26T14:00:00Z",
+    "updatedAt": "2025-12-26T16:00:00Z",
+    "project": "chakana-la-experiencia",
+    "tags": ["oportunidades", "expansion", "espana", "contactos"],
+    "excerpt": "Conversación informal sobre oportunidades de expansión y colaboración en España y América Latina."
+  },
+  {
+    "id": "reunion-ernesto-inversor",
+    "title": "Reunión con Ernesto - Inversor",
+    "slug": "reunion-ernesto-inversor",
+    "category": "ata",
+    "contentPath": "/content/atas/Reunion-Ernesto-Inversor-26-12-2025.md",
+    "createdAt": "2025-12-26T10:00:00Z",
+    "updatedAt": "2025-12-26T12:00:00Z",
+    "project": "chakana-la-experiencia",
+    "tags": ["inversor", "holding", "estructura", "legal"],
+    "excerpt": "Reunión con potencial inversor Ernesto. Capital inicial €100.000 para nueva SL."
+  },
+  {
+    "id": "plan-chakana-experiencia",
+    "title": "Plan de Empresa - Chakana La Experiencia",
+    "slug": "plan-chakana-experiencia",
+    "category": "business_plan",
+    "contentPath": "/content/plans/CHAKANA-LA-EXPERIENCIA-PLAN.md",
+    "createdAt": "2025-12-20T09:00:00Z",
+    "updatedAt": "2026-01-02T15:00:00Z",
+    "project": "chakana-la-experiencia",
+    "tags": ["plan-negocio", "retiros", "formacion", "5-fases"],
+    "excerpt": "Plan de empresa completo con 5 fases, desde fundación hasta escalamiento internacional."
+  },
+  {
+    "id": "plan-casa-chakana",
+    "title": "Plan de Empresa - Casa Chakana",
+    "slug": "plan-casa-chakana",
+    "category": "business_plan",
+    "contentPath": "/content/plans/CASA-CHAKANA-PLAN.md",
+    "createdAt": "2025-12-15T09:00:00Z",
+    "updatedAt": "2025-12-28T14:00:00Z",
+    "project": "casa-chakana",
+    "tags": ["plan-negocio", "centro", "inmobiliario"],
+    "excerpt": "Plan para el centro físico de transformación personal y profesional."
+  },
+  {
+    "id": "documento-colaboradores",
+    "title": "Documento Estratégico para Colaboradores",
+    "slug": "documento-colaboradores",
+    "category": "research",
+    "contentPath": "/content/research/documento-colaboradores.md",
+    "createdAt": "2025-12-28T10:00:00Z",
+    "updatedAt": "2025-12-30T16:00:00Z",
+    "project": "chakana-la-experiencia",
+    "tags": ["valores", "ecosistema", "cultura", "2.0"],
+    "excerpt": "Documento interno definiendo el ecosistema Chakana 2.0, valores y cultura organizacional."
+  }
+]

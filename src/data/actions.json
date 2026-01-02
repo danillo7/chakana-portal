@@ -1,0 +1,122 @@
+[
+  {
+    "id": "action-001",
+    "title": "Reunión planificación completa - Enero 7-10",
+    "description": "Sesión de planificación estratégica para Q1 2026. Definir prioridades, budget y responsables.",
+    "status": "pending",
+    "priority": "high",
+    "owner": "ivan-silva",
+    "deadline": "2026-01-10",
+    "createdAt": "2025-12-26T14:00:00Z",
+    "project": "chakana-la-experiencia",
+    "tags": ["planificacion", "estrategia", "Q1"]
+  },
+  {
+    "id": "action-002",
+    "title": "Crear plan de negocios detallado",
+    "description": "Documento completo con proyecciones financieras, análisis de mercado y estrategia de crecimiento.",
+    "status": "in_progress",
+    "priority": "high",
+    "owner": "danillo-costa",
+    "deadline": "2026-01-15",
+    "createdAt": "2025-12-26T14:00:00Z",
+    "project": "chakana-la-experiencia",
+    "tags": ["plan-negocio", "finanzas"]
+  },
+  {
+    "id": "action-003",
+    "title": "Lanzar primera web online de prueba",
+    "description": "MVP de plataforma digital para captar leads y validar propuesta de valor.",
+    "status": "pending",
+    "priority": "high",
+    "owner": "danillo-costa",
+    "deadline": "2026-01-31",
+    "createdAt": "2025-12-26T14:00:00Z",
+    "project": "chakana-la-experiencia",
+    "tags": ["web", "mvp", "digital"]
+  },
+  {
+    "id": "action-004",
+    "title": "Presentación en español para Ferran",
+    "description": "Deck de presentación para potencial inversor/colaborador del sector inmobiliario.",
+    "status": "pending",
+    "priority": "medium",
+    "owner": "ivan-silva",
+    "deadline": "2026-01-20",
+    "createdAt": "2025-12-26T14:00:00Z",
+    "project": "chakana-la-experiencia",
+    "tags": ["presentacion", "inversor", "ferran"]
+  },
+  {
+    "id": "action-005",
+    "title": "Validación información de inversiones",
+    "description": "Due diligence sobre oportunidades de inversión antes de comprometer recursos.",
+    "status": "pending",
+    "priority": "high",
+    "owner": "danillo-costa",
+    "deadline": "2026-01-25",
+    "createdAt": "2025-12-26T14:00:00Z",
+    "project": "chakana-la-experiencia",
+    "tags": ["due-diligence", "inversion", "legal"]
+  },
+  {
+    "id": "action-006",
+    "title": "Contratar seguro responsabilidad civil",
+    "description": "Seguro obligatorio para retiros extremos (Ecuador). Cotizar con 3 aseguradoras.",
+    "status": "pending",
+    "priority": "medium",
+    "owner": "ivan-silva",
+    "deadline": "2026-03-01",
+    "createdAt": "2025-12-26T14:00:00Z",
+    "project": "chakana-la-experiencia",
+    "tags": ["seguro", "legal", "retiros"]
+  },
+  {
+    "id": "action-007",
+    "title": "Estructurar holding con Ernesto",
+    "description": "Definir estructura societaria: SL española + empresa USA para Iván.",
+    "status": "pending",
+    "priority": "high",
+    "owner": "danillo-costa",
+    "deadline": "2026-02-15",
+    "createdAt": "2025-12-26T10:00:00Z",
+    "project": "chakana-la-experiencia",
+    "tags": ["legal", "holding", "estructura"]
+  },
+  {
+    "id": "action-008",
+    "title": "Reunión presencial Castellón + inversor Barcelona",
+    "description": "Encuentro con Ernesto y su inversor para cerrar términos.",
+    "status": "pending",
+    "priority": "high",
+    "owner": "ivan-silva",
+    "deadline": "2026-01-07",
+    "createdAt": "2025-12-26T10:00:00Z",
+    "project": "chakana-la-experiencia",
+    "tags": ["reunion", "inversor", "presencial"]
+  },
+  {
+    "id": "action-009",
+    "title": "Contactar Iskra para evento Mallorca",
+    "description": "Coordinar potencial evento en restaurante Triple H.",
+    "status": "pending",
+    "priority": "low",
+    "owner": "ivan-silva",
+    "deadline": "2026-02-28",
+    "createdAt": "2025-12-26T14:00:00Z",
+    "project": "chakana-la-experiencia",
+    "tags": ["evento", "mallorca", "iskra"]
+  },
+  {
+    "id": "action-010",
+    "title": "Preparar retiro Ecuador - Logística",
+    "description": "Coordinación logística para retiro extremo: permisos, equipamiento, médico.",
+    "status": "pending",
+    "priority": "medium",
+    "owner": "ivan-silva",
+    "deadline": "2026-04-30",
+    "createdAt": "2026-01-02T10:00:00Z",
+    "project": "chakana-la-experiencia",
+    "tags": ["ecuador", "logistica", "retiro"]
+  }
+]

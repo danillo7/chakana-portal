@@ -1,0 +1,8 @@
+export { Dashboard } from './Dashboard'
+export { DocumentsPage } from './Documents'
+export { ProjectsPage } from './Projects'
+export { ActionsPage } from './Actions'
+export { TeamPage } from './Team'
+export { TimelinePage } from './Timeline'
+export { FinancialPage } from './Financial'
+export { SettingsPage } from './Settings'
