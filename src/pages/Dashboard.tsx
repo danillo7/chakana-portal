@@ -1,8 +1,10 @@
+import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'
 import { useDataStore } from '../stores/dataStore'
+import { useUIStore, LOCATIONS } from '../stores/uiStore'
 import { formatCurrency, formatDateShort } from '../lib/utils'
 import { useGreeting, useWeather } from '../hooks/useGreeting'
 import {
@@ -19,11 +21,15 @@ import {
   Globe,
   Instagram,
   MessageCircle,
-  Star,
   ExternalLink,
   CalendarDays,
   MapPin,
   FileText,
+  ChevronDown,
+  Thermometer,
+  Droplets,
+  Wind,
+  Sparkles,
 } from 'lucide-react'
 
 // Quick links to social
@@ -67,8 +73,25 @@ const nextRetreat = {
 export function Dashboard() {
   const { t, i18n } = useTranslation()
   const { projects, actions, stakeholders, documents } = useDataStore()
-  const { greeting, emoji, timeString } = useGreeting(i18n.language)
-  const weather = useWeather()
+  const { selectedLocationId, setSelectedLocation, getSelectedLocation } = useUIStore()
+  const selectedLocation = getSelectedLocation()
+  const { greeting, emoji, timeString, dateString, dayOfWeek } = useGreeting(i18n.language, selectedLocation)
+  const weather = useWeather(selectedLocation)
+
+  // Location selector state
+  const [locationOpen, setLocationOpen] = useState(false)
+  const locationRef = useRef<HTMLDivElement>(null)
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (locationRef.current && !locationRef.current.contains(event.target as Node)) {
+        setLocationOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   // Calculate metrics
   const totalInvestment = projects.reduce((sum, p) => sum + (p.budget || 0), 0)
@@ -88,73 +111,234 @@ export function Dashboard() {
 
   return (
     <div className="space-y-8 animate-fade-in">
-      {/* Premium Hero Section - Chakana Brand */}
-      <div className="relative overflow-hidden rounded-3xl bg-chakana-dark p-8 md:p-10">
-        {/* Background Effects */}
-        <div className="absolute inset-0 bg-gradient-radial-sage opacity-40" />
-        <div className="absolute top-0 right-0 w-80 h-80 bg-chakana-sage/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-chakana-mint/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+      {/* ═══════════════════════════════════════════════════════════════════════
+          🌟 PREMIUM HERO SECTION - 100x BETTER DESIGN
+          Bento Grid Layout with Glass-morphism Effects
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <div className="relative">
+        {/* Ambient background glow */}
+        <div className="absolute -inset-4 bg-gradient-to-r from-chakana-sage/10 via-chakana-mint/15 to-chakana-sage/10 rounded-[2rem] blur-2xl opacity-60" />
 
-        <div className="relative z-10">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              {/* Dynamic Time & Weather Display */}
-              <div className="flex items-center gap-4 mb-4 text-white/60 text-sm">
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
-                  <span>{timeString}</span>
-                  <span className="text-white/40">|</span>
-                  <MapPin className="w-4 h-4" />
-                  <span>Valencia, ES</span>
+        <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-4">
+          {/* ─────────────────────────────────────────────────────────────────────
+              MAIN HERO CARD - Greeting & Branding (spans 8 cols)
+          ───────────────────────────────────────────────────────────────────── */}
+          <div className="lg:col-span-8 relative overflow-hidden rounded-3xl bg-chakana-dark p-8 md:p-10">
+            {/* Background Effects */}
+            <div className="absolute inset-0 bg-gradient-radial-sage opacity-30" />
+            <div className="absolute top-0 right-0 w-96 h-96 bg-chakana-sage/15 rounded-full blur-[100px] -translate-y-1/3 translate-x-1/3" />
+            <div className="absolute bottom-0 left-0 w-72 h-72 bg-chakana-mint/15 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/3" />
+            <div className="absolute top-1/2 left-1/2 w-48 h-48 bg-chakana-gold/10 rounded-full blur-[60px] -translate-x-1/2 -translate-y-1/2" />
+
+            {/* Subtle grid pattern overlay */}
+            <div
+              className="absolute inset-0 opacity-[0.03]"
+              style={{
+                backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+                backgroundSize: '24px 24px'
+              }}
+            />
+
+            <div className="relative z-10 flex flex-col h-full">
+              {/* Top Bar - Date & Day */}
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
+                    <CalendarDays className="w-4 h-4 text-chakana-mint" />
+                    <span className="text-sm font-medium text-white/80 capitalize">{dayOfWeek}</span>
+                    <span className="text-white/30">•</span>
+                    <span className="text-sm text-white/60">{dateString}</span>
+                  </div>
                 </div>
-                {weather && (
-                  <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/10">
-                    <span>{weather.icon}</span>
-                    <span>{weather.temp}°C</span>
+
+                {/* Quick Social Links */}
+                <div className="hidden md:flex items-center gap-2">
+                  {quickLinks.map((link) => {
+                    const Icon = link.icon
+                    return (
+                      <a
+                        key={link.name}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/20 flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                        title={link.name}
+                      >
+                        <Icon className="w-4 h-4 text-white/70 group-hover:text-white transition-colors" />
+                      </a>
+                    )
+                  })}
+                </div>
+              </div>
+
+              {/* Main Content - Greeting */}
+              <div className="flex-1 flex flex-col justify-center">
+                {/* Logo & Premium Badge */}
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="relative group">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-chakana-sage to-chakana-mint rounded-2xl blur opacity-40 group-hover:opacity-60 transition-opacity" />
+                    <div className="relative w-16 h-16 rounded-2xl overflow-hidden shadow-2xl ring-2 ring-white/20">
+                      <img
+                        src={`${import.meta.env.BASE_URL}logo-chakana.jpg`}
+                        alt="Chakana"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Badge className="w-fit badge-sage shadow-lg">
+                      <Sparkles className="w-3 h-3 mr-1.5" />
+                      Portal Premium
+                    </Badge>
+                    <span className="text-xs text-white/40 font-medium tracking-wider uppercase">Strategic Intelligence Platform</span>
+                  </div>
+                </div>
+
+                {/* Greeting Text */}
+                <div className="space-y-3">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-tight">
+                    {greeting}
+                    <span className="inline-block ml-3 animate-pulse">{emoji}</span>
+                  </h1>
+                  <h2 className="text-2xl md:text-3xl font-display font-bold">
+                    <span className="text-gradient-sage">Portal Chakana</span>
+                  </h2>
+                  <p className="text-lg text-white/50 max-w-lg mt-2">
+                    {t('dashboard.subtitle')}
+                  </p>
+                </div>
+              </div>
+
+              {/* Bottom Quick Stats Preview */}
+              <div className="flex items-center gap-6 mt-8 pt-6 border-t border-white/10">
+                <div className="flex items-center gap-2 text-white/60">
+                  <FolderKanban className="w-4 h-4 text-chakana-sage" />
+                  <span className="text-sm">{projects.length} proyectos</span>
+                </div>
+                <div className="flex items-center gap-2 text-white/60">
+                  <CheckSquare className="w-4 h-4 text-chakana-gold" />
+                  <span className="text-sm">{pendingActions} acciones</span>
+                </div>
+                <div className="flex items-center gap-2 text-white/60">
+                  <Users className="w-4 h-4 text-chakana-mint" />
+                  <span className="text-sm">{teamMembers} miembros</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ─────────────────────────────────────────────────────────────────────
+              RIGHT COLUMN - Time & Weather Cards (spans 4 cols)
+          ───────────────────────────────────────────────────────────────────── */}
+          <div className="lg:col-span-4 flex flex-col gap-4">
+            {/* TIME CARD - Premium Glass Design */}
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-chakana-dark via-chakana-dark-light to-chakana-dark p-6 flex-1">
+              {/* Glass effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-chakana-sage/20 rounded-full blur-3xl" />
+
+              <div className="relative z-10 flex flex-col h-full">
+                {/* Location Selector */}
+                <div className="relative mb-4" ref={locationRef}>
+                  <button
+                    onClick={() => setLocationOpen(!locationOpen)}
+                    className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all w-full group"
+                  >
+                    <MapPin className="w-4 h-4 text-chakana-sage" />
+                    <span className="text-sm font-medium text-white/80 flex-1 text-left">
+                      {selectedLocation.flag} {selectedLocation.city}, {selectedLocation.country}
+                    </span>
+                    <ChevronDown className={`w-4 h-4 text-white/50 transition-transform ${locationOpen ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  {/* Location Dropdown */}
+                  {locationOpen && (
+                    <div className="absolute top-full left-0 right-0 mt-2 p-2 rounded-xl bg-chakana-dark/95 backdrop-blur-xl border border-white/10 shadow-2xl z-50 animate-fade-in">
+                      {LOCATIONS.map((loc) => (
+                        <button
+                          key={loc.id}
+                          onClick={() => {
+                            setSelectedLocation(loc.id)
+                            setLocationOpen(false)
+                          }}
+                          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ${
+                            selectedLocationId === loc.id
+                              ? 'bg-chakana-sage/20 text-white'
+                              : 'text-white/70 hover:bg-white/5 hover:text-white'
+                          }`}
+                        >
+                          <span className="text-lg">{loc.flag}</span>
+                          <span className="flex-1 text-sm font-medium">{loc.city}</span>
+                          <span className="text-xs text-white/40">{loc.country}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Large Time Display */}
+                <div className="flex-1 flex flex-col items-center justify-center">
+                  <div className="flex items-center gap-1">
+                    <Clock className="w-5 h-5 text-chakana-mint mb-1" />
+                  </div>
+                  <span className="text-5xl md:text-6xl font-display font-bold text-white tracking-tight">
+                    {timeString}
+                  </span>
+                  <span className="text-sm text-white/40 mt-2">{selectedLocation.timezone.split('/')[1]?.replace('_', ' ') || selectedLocation.timezone}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* WEATHER CARD - Premium Glass Design */}
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-chakana-dark via-chakana-dark-light to-chakana-dark p-6 flex-1">
+              {/* Glass effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-chakana-gold/15 rounded-full blur-3xl" />
+
+              <div className="relative z-10 flex flex-col h-full">
+                {weather ? (
+                  <>
+                    {/* Main Weather Display */}
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <span className="text-5xl">{weather.icon}</span>
+                      </div>
+                      <div className="text-right">
+                        <div className="flex items-start">
+                          <span className="text-5xl font-display font-bold text-white">{weather.temp}</span>
+                          <span className="text-2xl text-white/60 font-light">°C</span>
+                        </div>
+                        <p className="text-sm text-white/50 mt-1">{weather.description}</p>
+                      </div>
+                    </div>
+
+                    {/* Weather Details Grid */}
+                    <div className="grid grid-cols-3 gap-2 mt-auto pt-4 border-t border-white/10">
+                      <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/5">
+                        <Thermometer className="w-4 h-4 text-chakana-rose" />
+                        <span className="text-xs text-white/50">Sens.</span>
+                        <span className="text-sm font-semibold text-white">{weather.feelsLike}°</span>
+                      </div>
+                      <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/5">
+                        <Droplets className="w-4 h-4 text-blue-400" />
+                        <span className="text-xs text-white/50">Hum.</span>
+                        <span className="text-sm font-semibold text-white">{weather.humidity}%</span>
+                      </div>
+                      <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/5">
+                        <Wind className="w-4 h-4 text-chakana-mint" />
+                        <span className="text-xs text-white/50">Viento</span>
+                        <span className="text-sm font-semibold text-white">{weather.windSpeed}km/h</span>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  /* Weather Loading State */
+                  <div className="flex-1 flex flex-col items-center justify-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-white/10 animate-pulse" />
+                    <span className="text-sm text-white/40">Cargando clima...</span>
                   </div>
                 )}
               </div>
-
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-2xl overflow-hidden shadow-sage-glow">
-                  <img
-                    src={`${import.meta.env.BASE_URL}logo-chakana.jpg`}
-                    alt="Chakana"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <Badge className="badge-sage">
-                  <Star className="w-3 h-3 mr-1" />
-                  Portal Premium
-                </Badge>
-              </div>
-
-              <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                {greeting} {emoji}{' '}
-                <span className="text-gradient-sage">Portal Chakana</span>
-              </h1>
-              <p className="text-white/70 text-lg max-w-xl">
-                {t('dashboard.subtitle')}
-              </p>
-            </div>
-
-            {/* Quick Links */}
-            <div className="flex gap-3">
-              {quickLinks.map((link) => {
-                const Icon = link.icon
-                return (
-                  <a
-                    key={link.name}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-2xl bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all duration-300 hover:scale-110"
-                    title={link.name}
-                  >
-                    <Icon className="w-5 h-5 text-white" />
-                  </a>
-                )
-              })}
             </div>
           </div>
         </div>
@@ -445,7 +629,7 @@ export function Dashboard() {
             {recentDocs.map((doc) => (
               <Link
                 key={doc.id}
-                to="/documents"
+                to={`/documents/${doc.slug}`}
                 className="p-5 rounded-2xl border border-border/50 hover:border-chakana-sage/30 hover:shadow-sage-glow transition-all duration-300 cursor-pointer group"
               >
                 <div className="flex items-start gap-4">

@@ -1,12 +1,21 @@
-import { useState, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
+import { useNavigate } from 'react-router-dom'
 import { Badge } from '../components/ui/badge'
 import { Button } from '../components/ui/button'
 import { useDataStore } from '../stores/dataStore'
 import { formatDateShort } from '../lib/utils'
-import { Calendar, Tag, X, Download, ExternalLink, FileText, Loader2, AlertCircle } from 'lucide-react'
+import {
+  Calendar,
+  Tag,
+  FileText,
+  ArrowRight,
+  Search,
+  Filter,
+  Grid3X3,
+  List,
+  Sparkles
+} from 'lucide-react'
 import type { Document } from '../types'
 
 const categoryIcons: Record<string, string> = {
@@ -25,293 +34,326 @@ const categoryGradients: Record<string, string> = {
   financial: 'from-chakana-gold/20 to-amber-500/20',
 }
 
-// Helper to build full URL with base path
-const getDocumentUrl = (contentPath: string) => {
-  const base = import.meta.env.BASE_URL || '/'
-  // Remove leading slash from contentPath if base already has trailing slash
-  const path = contentPath.startsWith('/') ? contentPath.slice(1) : contentPath
-  return `${base}${path}`
+const categoryColors: Record<string, string> = {
+  ata: 'bg-chakana-sage/10 text-chakana-sage border-chakana-sage/30',
+  business_plan: 'bg-chakana-gold/10 text-chakana-gold border-chakana-gold/30',
+  research: 'bg-blue-500/10 text-blue-600 border-blue-500/30',
+  legal: 'bg-purple-500/10 text-purple-600 border-purple-500/30',
+  financial: 'bg-amber-500/10 text-amber-600 border-amber-500/30',
 }
+
+type ViewMode = 'grid' | 'list'
+type CategoryFilter = 'all' | Document['category']
 
 export function DocumentsPage() {
   const { t, i18n } = useTranslation()
+  const navigate = useNavigate()
   const { documents } = useDataStore()
-  const [selectedDoc, setSelectedDoc] = useState<Document | null>(null)
-  const [markdownContent, setMarkdownContent] = useState<string>('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
 
-  // Fetch markdown content when a document is selected
-  useEffect(() => {
-    if (!selectedDoc?.contentPath) {
-      setMarkdownContent('')
-      setError(null)
-      return
-    }
+  const [viewMode, setViewMode] = useState<ViewMode>('grid')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>('all')
 
-    const fetchMarkdown = async () => {
-      setIsLoading(true)
-      setError(null)
-      setMarkdownContent('')
-
-      try {
-        const url = getDocumentUrl(selectedDoc.contentPath)
-        const response = await fetch(url)
-
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${response.statusText}`)
-        }
-
-        const text = await response.text()
-        setMarkdownContent(text)
-      } catch (err) {
-        console.error('Error fetching document:', err)
-        setError(err instanceof Error ? err.message : 'Failed to load document')
-      } finally {
-        setIsLoading(false)
+  // Filter and search documents
+  const filteredDocuments = useMemo(() => {
+    return documents.filter((doc) => {
+      // Category filter
+      if (categoryFilter !== 'all' && doc.category !== categoryFilter) {
+        return false
       }
-    }
+      // Search filter
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase()
+        return (
+          doc.title.toLowerCase().includes(query) ||
+          doc.excerpt?.toLowerCase().includes(query) ||
+          doc.tags.some((tag) => tag.toLowerCase().includes(query))
+        )
+      }
+      return true
+    })
+  }, [documents, categoryFilter, searchQuery])
 
-    fetchMarkdown()
-  }, [selectedDoc])
+  // Group documents by category for stats
+  const categoryStats = useMemo(() => {
+    const stats: Record<string, number> = { all: documents.length }
+    documents.forEach((doc) => {
+      stats[doc.category] = (stats[doc.category] || 0) + 1
+    })
+    return stats
+  }, [documents])
 
   const handleOpenDocument = (doc: Document) => {
-    setSelectedDoc(doc)
-  }
-
-  const handleCloseModal = () => {
-    setSelectedDoc(null)
-    setMarkdownContent('')
-    setError(null)
-  }
-
-  const handleDownload = (doc: Document) => {
-    // If document has a content path, trigger download with correct base path
-    if (doc.contentPath) {
-      window.open(getDocumentUrl(doc.contentPath), '_blank')
-    }
+    navigate(`/documents/${doc.slug}`)
   }
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="section-header">
-        <h1 className="text-3xl font-display font-bold text-gradient-sage">
-          {t('documents.title')}
-        </h1>
-        <p className="text-muted-foreground mt-1">
-          {t('documents.subtitle')}
-        </p>
+    <div className="space-y-8">
+      {/* Premium Header */}
+      <div className="relative">
+        <div className="absolute -inset-4 bg-gradient-to-r from-chakana-sage/5 via-chakana-mint/10 to-chakana-sage/5 rounded-3xl blur-xl" />
+        <div className="relative">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-chakana-sage to-chakana-sage-dark flex items-center justify-center shadow-sage-glow">
+                  <FileText className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-3xl font-display font-bold text-gradient-sage">
+                    {t('documents.title')}
+                  </h1>
+                  <p className="text-muted-foreground">
+                    {t('documents.subtitle')}
+                  </p>
+                </div>
+              </div>
+            </div>
+            {/* Document Count Badge */}
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-chakana-sage/10 border border-chakana-sage/20">
+              <Sparkles className="w-4 h-4 text-chakana-gold" />
+              <span className="text-sm font-medium text-chakana-sage">
+                {documents.length} {t('documents.title').toLowerCase()}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Documents Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {documents.map((doc) => (
-          <div
-            key={doc.id}
-            onClick={() => handleOpenDocument(doc)}
-            className="document-card group"
+      {/* Filters & Search Bar */}
+      <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
+        {/* Category Pills */}
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={() => setCategoryFilter('all')}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+              categoryFilter === 'all'
+                ? 'bg-chakana-sage text-white shadow-sage-glow'
+                : 'bg-card border border-border text-muted-foreground hover:border-chakana-sage/50 hover:text-foreground'
+            }`}
           >
-            {/* Gradient overlay based on category */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${categoryGradients[doc.category] || 'from-chakana-sage/10 to-transparent'} opacity-50 group-hover:opacity-70 transition-opacity rounded-2xl`} />
+            {t('documents.filters.all')} ({categoryStats.all})
+          </button>
+          {(['ata', 'business_plan', 'research', 'legal', 'financial'] as const).map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setCategoryFilter(cat)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
+                categoryFilter === cat
+                  ? 'bg-chakana-sage text-white shadow-sage-glow'
+                  : 'bg-card border border-border text-muted-foreground hover:border-chakana-sage/50 hover:text-foreground'
+              }`}
+            >
+              <span>{categoryIcons[cat]}</span>
+              {t(`documents.categories.${cat === 'ata' ? 'atas' : cat === 'business_plan' ? 'businessPlans' : cat}`)}
+              {categoryStats[cat] && <span className="text-xs opacity-70">({categoryStats[cat]})</span>}
+            </button>
+          ))}
+        </div>
 
-            <div className="relative">
-              {/* Header */}
-              <div className="flex items-start gap-3 mb-4">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-chakana-sage to-chakana-sage-dark flex items-center justify-center text-2xl shadow-sage-glow">
-                  {categoryIcons[doc.category] || '📄'}
+        {/* Search & View Toggle */}
+        <div className="flex items-center gap-3 w-full lg:w-auto">
+          {/* Search Input */}
+          <div className="relative flex-1 lg:w-64">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <input
+              type="text"
+              placeholder={t('common.search')}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-chakana-sage/30 focus:border-chakana-sage transition-all"
+            />
+          </div>
+
+          {/* View Mode Toggle */}
+          <div className="flex items-center gap-1 p-1 rounded-xl bg-card border border-border">
+            <button
+              onClick={() => setViewMode('grid')}
+              className={`p-2 rounded-lg transition-all ${
+                viewMode === 'grid'
+                  ? 'bg-chakana-sage text-white'
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              <Grid3X3 className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => setViewMode('list')}
+              className={`p-2 rounded-lg transition-all ${
+                viewMode === 'list'
+                  ? 'bg-chakana-sage text-white'
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              <List className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Results Info */}
+      {(searchQuery || categoryFilter !== 'all') && (
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Filter className="w-4 h-4" />
+          <span>
+            {filteredDocuments.length} resultado{filteredDocuments.length !== 1 ? 's' : ''}
+            {searchQuery && ` para "${searchQuery}"`}
+          </span>
+          {(searchQuery || categoryFilter !== 'all') && (
+            <button
+              onClick={() => {
+                setSearchQuery('')
+                setCategoryFilter('all')
+              }}
+              className="text-chakana-sage hover:underline ml-2"
+            >
+              Limpiar filtros
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* Documents Grid/List */}
+      {viewMode === 'grid' ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredDocuments.map((doc, index) => (
+            <div
+              key={doc.id}
+              onClick={() => handleOpenDocument(doc)}
+              className="group relative bg-card rounded-2xl border border-border overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-xl hover:shadow-chakana-sage/10 hover:border-chakana-sage/30 hover:-translate-y-1"
+              style={{ animationDelay: `${index * 50}ms` }}
+            >
+              {/* Gradient overlay based on category */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${categoryGradients[doc.category] || 'from-chakana-sage/10 to-transparent'} opacity-30 group-hover:opacity-50 transition-opacity`} />
+
+              <div className="relative p-6">
+                {/* Header */}
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-chakana-sage to-chakana-sage-dark flex items-center justify-center text-2xl shadow-sage-glow group-hover:scale-110 transition-transform">
+                    {categoryIcons[doc.category] || '📄'}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-foreground line-clamp-2 group-hover:text-chakana-sage transition-colors">
+                      {doc.title}
+                    </h3>
+                    <Badge className={`mt-2 ${categoryColors[doc.category]}`}>
+                      {t(`documents.categories.${doc.category === 'ata' ? 'atas' : doc.category === 'business_plan' ? 'businessPlans' : doc.category}`)}
+                    </Badge>
+                  </div>
                 </div>
-                <div className="flex-1 min-w-0">
+
+                {/* Excerpt */}
+                <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+                  {doc.excerpt}
+                </p>
+
+                {/* Tags */}
+                {doc.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {doc.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2 py-0.5 text-xs rounded-full bg-chakana-sage/5 text-chakana-sage/70 border border-chakana-sage/10"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                    {doc.tags.length > 3 && (
+                      <span className="px-2 py-0.5 text-xs rounded-full bg-muted text-muted-foreground">
+                        +{doc.tags.length - 3}
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                {/* Footer */}
+                <div className="flex items-center justify-between pt-4 border-t border-border/50">
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3.5 h-3.5 text-chakana-sage/70" />
+                      {formatDateShort(doc.updatedAt, i18n.language)}
+                    </span>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-chakana-sage opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        /* List View */
+        <div className="space-y-3">
+          {filteredDocuments.map((doc, index) => (
+            <div
+              key={doc.id}
+              onClick={() => handleOpenDocument(doc)}
+              className="group flex items-center gap-4 p-4 bg-card rounded-xl border border-border cursor-pointer transition-all duration-200 hover:shadow-lg hover:shadow-chakana-sage/5 hover:border-chakana-sage/30"
+              style={{ animationDelay: `${index * 30}ms` }}
+            >
+              {/* Icon */}
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-chakana-sage to-chakana-sage-dark flex items-center justify-center text-xl shadow-sage-glow flex-shrink-0 group-hover:scale-105 transition-transform">
+                {categoryIcons[doc.category] || '📄'}
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-3 mb-1">
                   <h3 className="font-semibold text-foreground truncate group-hover:text-chakana-sage transition-colors">
                     {doc.title}
                   </h3>
-                  <Badge className="mt-1 badge-sage">
+                  <Badge className={`flex-shrink-0 ${categoryColors[doc.category]}`}>
                     {t(`documents.categories.${doc.category === 'ata' ? 'atas' : doc.category === 'business_plan' ? 'businessPlans' : doc.category}`)}
                   </Badge>
                 </div>
+                <p className="text-sm text-muted-foreground truncate">
+                  {doc.excerpt}
+                </p>
               </div>
 
-              {/* Excerpt */}
-              <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
-                {doc.excerpt}
-              </p>
-
-              {/* Meta info */}
-              <div className="flex items-center justify-between text-xs text-muted-foreground">
-                <div className="flex items-center gap-4">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5 text-chakana-sage" />
-                    {formatDateShort(doc.updatedAt, i18n.language)}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Tag className="w-3.5 h-3.5 text-chakana-sage" />
-                    {doc.tags.length} tags
-                  </span>
-                </div>
-                <FileText className="w-4 h-4 text-chakana-sage/50 group-hover:text-chakana-sage transition-colors" />
+              {/* Meta */}
+              <div className="hidden md:flex items-center gap-4 text-xs text-muted-foreground flex-shrink-0">
+                <span className="flex items-center gap-1">
+                  <Calendar className="w-3.5 h-3.5" />
+                  {formatDateShort(doc.updatedAt, i18n.language)}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Tag className="w-3.5 h-3.5" />
+                  {doc.tags.length}
+                </span>
               </div>
+
+              {/* Arrow */}
+              <ArrowRight className="w-5 h-5 text-chakana-sage opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0" />
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
-      {/* Document Modal */}
-      {selectedDoc && (
-        <div
-          className="modal-overlay"
-          onClick={handleCloseModal}
-        >
-          <div
-            className="modal-content animate-scale-in"
-            onClick={(e) => e.stopPropagation()}
+      {/* Empty State */}
+      {filteredDocuments.length === 0 && (
+        <div className="flex flex-col items-center justify-center py-16 space-y-4">
+          <div className="w-20 h-20 rounded-full bg-chakana-sage/10 flex items-center justify-center">
+            <FileText className="w-10 h-10 text-chakana-sage/50" />
+          </div>
+          <div className="text-center">
+            <h3 className="text-lg font-semibold text-foreground mb-1">
+              No se encontraron documentos
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              Intenta ajustar los filtros o el término de búsqueda
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            onClick={() => {
+              setSearchQuery('')
+              setCategoryFilter('all')
+            }}
+            className="gap-2"
           >
-            {/* Modal Header */}
-            <div className="relative p-6 border-b border-border bg-gradient-to-r from-chakana-sage/10 to-chakana-mint/20">
-              <div className="flex items-start gap-4">
-                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-chakana-sage to-chakana-sage-dark flex items-center justify-center text-3xl shadow-sage-glow">
-                  {categoryIcons[selectedDoc.category] || '📄'}
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-xl font-bold text-foreground">
-                    {selectedDoc.title}
-                  </h2>
-                  <div className="flex items-center gap-3 mt-2">
-                    <Badge className="badge-sage">
-                      {t(`documents.categories.${selectedDoc.category === 'ata' ? 'atas' : selectedDoc.category === 'business_plan' ? 'businessPlans' : selectedDoc.category}`)}
-                    </Badge>
-                    <span className="text-sm text-muted-foreground flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {formatDateShort(selectedDoc.updatedAt, i18n.language)}
-                    </span>
-                  </div>
-                </div>
-                <button
-                  onClick={handleCloseModal}
-                  className="p-2 rounded-full hover:bg-chakana-sage/10 transition-colors"
-                >
-                  <X className="w-5 h-5 text-muted-foreground" />
-                </button>
-              </div>
-            </div>
-
-            {/* Modal Body */}
-            <div className="p-6 max-h-[60vh] overflow-y-auto custom-scrollbar">
-              {/* Tags */}
-              {selectedDoc.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {selectedDoc.tags.map((tag) => (
-                    <Badge key={tag} variant="outline" className="text-xs bg-chakana-sage/5 border-chakana-sage/30 hover:bg-chakana-sage/10 transition-colors">
-                      #{tag}
-                    </Badge>
-                  ))}
-                </div>
-              )}
-
-              {/* Loading State */}
-              {isLoading && (
-                <div className="flex flex-col items-center justify-center py-16 space-y-4">
-                  <div className="relative">
-                    <div className="w-16 h-16 rounded-full bg-chakana-sage/10 animate-pulse" />
-                    <Loader2 className="w-8 h-8 text-chakana-sage absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-spin" />
-                  </div>
-                  <p className="text-sm text-muted-foreground animate-pulse">
-                    {t('documents.loading')}
-                  </p>
-                </div>
-              )}
-
-              {/* Error State */}
-              {error && !isLoading && (
-                <div className="flex flex-col items-center justify-center py-12 space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center">
-                    <AlertCircle className="w-8 h-8 text-red-500" />
-                  </div>
-                  <div className="text-center">
-                    <p className="text-sm font-medium text-foreground mb-1">
-                      {t('documents.errorLoading')}
-                    </p>
-                    <p className="text-xs text-muted-foreground max-w-md">
-                      {error}
-                    </p>
-                  </div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => window.open(getDocumentUrl(selectedDoc.contentPath), '_blank')}
-                    className="gap-2 mt-2"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    {t('documents.openExternal')}
-                  </Button>
-                </div>
-              )}
-
-              {/* Markdown Content */}
-              {!isLoading && !error && markdownContent && (
-                <article className="prose-chakana">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {markdownContent}
-                  </ReactMarkdown>
-                </article>
-              )}
-
-              {/* Fallback: Show excerpt if no contentPath */}
-              {!isLoading && !error && !markdownContent && !selectedDoc.contentPath && (
-                <div className="prose-chakana">
-                  <p className="text-foreground leading-relaxed">
-                    {selectedDoc.excerpt || t('documents.noContent')}
-                  </p>
-                </div>
-              )}
-
-              {/* Project reference - always show at bottom when available */}
-              {selectedDoc.project && !isLoading && (
-                <div className="mt-8 p-4 bg-gradient-to-r from-chakana-mint/20 to-chakana-sage/10 rounded-xl border border-chakana-sage/20">
-                  <p className="text-sm text-muted-foreground">
-                    <strong className="text-chakana-sage">{t('documents.project')}:</strong>{' '}
-                    <span className="text-foreground">{selectedDoc.project}</span>
-                  </p>
-                </div>
-              )}
-            </div>
-
-            {/* Modal Footer */}
-            <div className="p-6 border-t border-border bg-muted/30 flex items-center justify-between gap-4">
-              <div className="text-sm text-muted-foreground">
-                ID: {selectedDoc.id}
-              </div>
-              <div className="flex items-center gap-3">
-                {selectedDoc.contentPath && (
-                  <>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleDownload(selectedDoc)}
-                      className="gap-2"
-                    >
-                      <Download className="w-4 h-4" />
-                      {t('common.download')}
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => window.open(getDocumentUrl(selectedDoc.contentPath), '_blank')}
-                      className="gap-2"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      {t('common.open')}
-                    </Button>
-                  </>
-                )}
-                <Button
-                  onClick={handleCloseModal}
-                  className="btn-premium gap-2"
-                >
-                  {t('common.close')}
-                </Button>
-              </div>
-            </div>
-          </div>
+            <Filter className="w-4 h-4" />
+            Limpiar filtros
+          </Button>
         </div>
       )}
     </div>

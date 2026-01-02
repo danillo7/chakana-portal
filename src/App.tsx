@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom'
 import { AppLayout } from './components/layout/AppLayout'
 import { Dashboard } from './pages/Dashboard'
 import { DocumentsPage } from './pages/Documents'
+import { DocumentViewerPage } from './pages/DocumentViewer'
 import { ProjectsPage } from './pages/Projects'
 import { ActionsPage } from './pages/Actions'
 import { TeamPage } from './pages/Team'
@@ -18,6 +19,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="testimonials" element={<TestimonialsPage />} />
           <Route path="documents" element={<DocumentsPage />} />
+          <Route path="documents/:slug" element={<DocumentViewerPage />} />
           <Route path="projects" element={<ProjectsPage />} />
           <Route path="actions" element={<ActionsPage />} />
           <Route path="team" element={<TeamPage />} />

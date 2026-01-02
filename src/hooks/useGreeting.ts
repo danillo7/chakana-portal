@@ -1,27 +1,31 @@
-import { useState, useEffect } from 'react'
-
-// Spain timezone (CET/CEST)
-const SPAIN_TIMEZONE = 'Europe/Madrid'
+import { useState, useEffect, useCallback } from 'react'
+import type { LocationOption } from '../stores/uiStore'
 
 interface GreetingData {
   greeting: string
   greetingKey: 'morning' | 'afternoon' | 'evening' | 'night'
   timeString: string
+  dateString: string
   emoji: string
+  dayOfWeek: string
 }
 
 interface WeatherData {
   temp: number
+  feelsLike: number
   description: string
   icon: string
   city: string
+  humidity: number
+  windSpeed: number
+  condition: string
 }
 
-// Get current hour in Spain timezone
-function getSpainHour(): number {
+// Get current hour in specific timezone
+function getHourInTimezone(timezone: string): number {
   const now = new Date()
-  const spainTime = new Date(now.toLocaleString('en-US', { timeZone: SPAIN_TIMEZONE }))
-  return spainTime.getHours()
+  const tzTime = new Date(now.toLocaleString('en-US', { timeZone: timezone }))
+  return tzTime.getHours()
 }
 
 // Get greeting based on hour
@@ -43,30 +47,54 @@ function getGreetingEmoji(key: string): string {
   }
 }
 
-export function useGreeting(language: string = 'es-ES'): GreetingData {
+// Get localized day of week
+function getDayOfWeek(timezone: string, language: string): string {
+  const now = new Date()
+  return now.toLocaleDateString(language, {
+    timeZone: timezone,
+    weekday: 'long'
+  })
+}
+
+export function useGreeting(language: string = 'es-ES', location?: LocationOption): GreetingData {
+  const timezone = location?.timezone || 'Europe/Madrid'
+
   const [greeting, setGreeting] = useState<GreetingData>(() => {
-    const hour = getSpainHour()
+    const hour = getHourInTimezone(timezone)
     const key = getGreetingKey(hour)
     return {
       greeting: '',
       greetingKey: key,
       timeString: '',
-      emoji: getGreetingEmoji(key)
+      dateString: '',
+      emoji: getGreetingEmoji(key),
+      dayOfWeek: ''
     }
   })
 
   useEffect(() => {
     const updateGreeting = () => {
       const now = new Date()
-      const hour = getSpainHour()
+      const hour = getHourInTimezone(timezone)
       const key = getGreetingKey(hour)
 
-      // Format time in Spain timezone
+      // Format time in timezone
       const timeString = now.toLocaleString(language, {
-        timeZone: SPAIN_TIMEZONE,
+        timeZone: timezone,
         hour: '2-digit',
         minute: '2-digit',
       })
+
+      // Format date
+      const dateString = now.toLocaleDateString(language, {
+        timeZone: timezone,
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      })
+
+      // Get day of week
+      const dayOfWeek = getDayOfWeek(timezone, language)
 
       // Get localized greeting
       const greetings: Record<string, Record<string, string>> = {
@@ -96,7 +124,9 @@ export function useGreeting(language: string = 'es-ES'): GreetingData {
         greeting: localeGreetings[key],
         greetingKey: key,
         timeString,
-        emoji: getGreetingEmoji(key)
+        dateString,
+        emoji: getGreetingEmoji(key),
+        dayOfWeek
       })
     }
 
@@ -105,47 +135,52 @@ export function useGreeting(language: string = 'es-ES'): GreetingData {
     // Update every minute
     const interval = setInterval(updateGreeting, 60000)
     return () => clearInterval(interval)
-  }, [language])
+  }, [language, timezone])
 
   return greeting
 }
 
-// Simple weather hook using free API (Valencia, Spain)
-export function useWeather(): WeatherData | null {
+// Enhanced weather hook with location support
+export function useWeather(location?: LocationOption): WeatherData | null {
   const [weather, setWeather] = useState<WeatherData | null>(null)
+  const coords = location?.coords || 'Valencia,Spain'
+
+  const fetchWeather = useCallback(async () => {
+    try {
+      // Using wttr.in free API (no key needed)
+      const response = await fetch(
+        `https://wttr.in/${coords}?format=j1`,
+        { headers: { 'Accept': 'application/json' } }
+      )
+
+      if (response.ok) {
+        const data = await response.json()
+        const current = data.current_condition[0]
+
+        setWeather({
+          temp: parseInt(current.temp_C),
+          feelsLike: parseInt(current.FeelsLikeC),
+          description: current.weatherDesc[0].value,
+          icon: getWeatherIcon(current.weatherCode),
+          city: location?.city || 'Valencia',
+          humidity: parseInt(current.humidity),
+          windSpeed: parseInt(current.windspeedKmph),
+          condition: getWeatherCondition(current.weatherCode)
+        })
+      }
+    } catch {
+      // Silently fail - weather is optional
+      console.log('Weather API unavailable')
+    }
+  }, [coords, location?.city])
 
   useEffect(() => {
-    const fetchWeather = async () => {
-      try {
-        // Using wttr.in free API (no key needed)
-        const response = await fetch(
-          'https://wttr.in/Valencia,Spain?format=j1',
-          { headers: { 'Accept': 'application/json' } }
-        )
-
-        if (response.ok) {
-          const data = await response.json()
-          const current = data.current_condition[0]
-
-          setWeather({
-            temp: parseInt(current.temp_C),
-            description: current.weatherDesc[0].value,
-            icon: getWeatherIcon(current.weatherCode),
-            city: 'Valencia'
-          })
-        }
-      } catch {
-        // Silently fail - weather is optional
-        console.log('Weather API unavailable')
-      }
-    }
-
     fetchWeather()
 
-    // Update weather every 30 minutes
-    const interval = setInterval(fetchWeather, 30 * 60 * 1000)
+    // Update weather every 15 minutes
+    const interval = setInterval(fetchWeather, 15 * 60 * 1000)
     return () => clearInterval(interval)
-  }, [])
+  }, [fetchWeather])
 
   return weather
 }
@@ -163,4 +198,18 @@ function getWeatherIcon(code: string): string {
   if (codeNum >= 311 && codeNum <= 395) return '🌧️' // Various rain
 
   return '🌤️' // Default
+}
+
+// Get weather condition category
+function getWeatherCondition(code: string): string {
+  const codeNum = parseInt(code)
+
+  if (codeNum === 113) return 'clear'
+  if (codeNum === 116) return 'partly-cloudy'
+  if (codeNum >= 119 && codeNum <= 122) return 'cloudy'
+  if (codeNum >= 176 && codeNum <= 232) return 'rainy'
+  if (codeNum >= 260 && codeNum <= 284) return 'foggy'
+  if (codeNum >= 311 && codeNum <= 395) return 'rainy'
+
+  return 'default'
 }
