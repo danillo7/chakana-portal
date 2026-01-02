@@ -31,7 +31,15 @@
     "stakeholders": "Team",
     "timeline": "Timeline",
     "financial": "Financial",
-    "settings": "Settings"
+    "settings": "Settings",
+    "strategy": "Strategy",
+    "businessPlan": "Business Plan",
+    "swot": "SWOT Analysis",
+    "intelligence": "Intelligence",
+    "market": "Market",
+    "news": "News",
+    "operations": "Operations",
+    "people": "People"
   },
   "dashboard": {
     "title": "Dashboard",
