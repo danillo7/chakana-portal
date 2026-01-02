@@ -365,30 +365,189 @@
   }
 }
 
-/* Prose styling for markdown content */
+/* Prose styling for markdown content - Premium Experience */
 .prose-chakana {
   @apply prose prose-stone dark:prose-invert max-w-none;
+  @apply text-foreground/90 leading-relaxed;
 }
 
+/* Headings */
 .prose-chakana h1 {
-  @apply font-display text-chakana-dark dark:text-chakana-mint;
+  @apply font-display text-2xl md:text-3xl text-chakana-dark dark:text-chakana-mint;
+  @apply border-b-2 border-chakana-sage/30 pb-3 mb-6;
 }
 
 .prose-chakana h2 {
-  @apply font-display text-chakana-dark-light dark:text-chakana-mint-light;
+  @apply font-display text-xl md:text-2xl text-chakana-sage dark:text-chakana-mint-light;
+  @apply mt-10 mb-4 pb-2 border-b border-chakana-sage/20;
 }
 
+.prose-chakana h3 {
+  @apply font-semibold text-lg text-chakana-dark dark:text-chakana-mint;
+  @apply mt-8 mb-3;
+}
+
+.prose-chakana h4 {
+  @apply font-semibold text-base text-chakana-sage-dark dark:text-chakana-sage;
+  @apply mt-6 mb-2;
+}
+
+/* Links */
 .prose-chakana a {
   @apply text-chakana-sage hover:text-chakana-sage-dark underline-offset-4;
+  @apply decoration-chakana-sage/40 hover:decoration-chakana-sage transition-colors;
 }
 
+/* Strong/Bold */
 .prose-chakana strong {
-  @apply text-chakana-dark dark:text-chakana-mint;
+  @apply text-chakana-dark dark:text-chakana-mint font-semibold;
 }
 
+/* Emphasis/Italic */
+.prose-chakana em {
+  @apply text-foreground/80 italic;
+}
+
+/* Blockquotes */
 .prose-chakana blockquote {
-  @apply border-l-4 border-chakana-sage/50 bg-chakana-mint/30 dark:bg-chakana-sage/10
-         pl-6 py-4 rounded-r-lg italic;
+  @apply border-l-4 border-chakana-sage bg-gradient-to-r from-chakana-mint/40 to-chakana-mint/10
+         dark:from-chakana-sage/20 dark:to-transparent
+         pl-6 py-4 rounded-r-xl italic my-6;
+  @apply text-foreground/80 not-italic;
+}
+
+.prose-chakana blockquote p {
+  @apply m-0 italic;
+}
+
+/* Code - Inline */
+.prose-chakana code:not(pre code) {
+  @apply bg-chakana-sage/10 text-chakana-sage-dark dark:text-chakana-mint
+         px-1.5 py-0.5 rounded-md text-sm font-mono;
+  @apply before:content-[''] after:content-[''];
+}
+
+/* Code - Block */
+.prose-chakana pre {
+  @apply bg-chakana-dark text-chakana-mint rounded-xl p-4 my-6;
+  @apply border border-chakana-sage/20 shadow-inner;
+  @apply overflow-x-auto;
+}
+
+.prose-chakana pre code {
+  @apply text-sm leading-relaxed font-mono;
+  @apply bg-transparent p-0;
+}
+
+/* Lists - Unordered */
+.prose-chakana ul {
+  @apply my-4 ml-0 space-y-2;
+}
+
+.prose-chakana ul > li {
+  @apply relative pl-6;
+}
+
+.prose-chakana ul > li::marker {
+  @apply text-chakana-sage;
+}
+
+/* Lists - Ordered */
+.prose-chakana ol {
+  @apply my-4 ml-0 space-y-2;
+}
+
+.prose-chakana ol > li {
+  @apply relative pl-6;
+}
+
+.prose-chakana ol > li::marker {
+  @apply text-chakana-sage font-semibold;
+}
+
+/* Nested Lists */
+.prose-chakana li > ul,
+.prose-chakana li > ol {
+  @apply mt-2 mb-0;
+}
+
+/* Tables */
+.prose-chakana table {
+  @apply w-full my-6 text-sm;
+  @apply border-collapse rounded-xl overflow-hidden;
+  @apply border border-chakana-sage/20;
+}
+
+.prose-chakana thead {
+  @apply bg-gradient-to-r from-chakana-sage to-chakana-sage-dark text-white;
+}
+
+.prose-chakana th {
+  @apply px-4 py-3 text-left font-semibold text-sm uppercase tracking-wide;
+  @apply border-b border-chakana-sage-dark;
+}
+
+.prose-chakana tbody tr {
+  @apply border-b border-chakana-sage/10 last:border-0;
+  @apply transition-colors hover:bg-chakana-mint/30 dark:hover:bg-chakana-sage/10;
+}
+
+.prose-chakana td {
+  @apply px-4 py-3;
+}
+
+.prose-chakana tbody tr:nth-child(even) {
+  @apply bg-chakana-mint/20 dark:bg-chakana-sage/5;
+}
+
+/* Horizontal Rules */
+.prose-chakana hr {
+  @apply my-8 border-0 h-px;
+  @apply bg-gradient-to-r from-transparent via-chakana-sage/40 to-transparent;
+}
+
+/* Images */
+.prose-chakana img {
+  @apply rounded-xl shadow-premium my-6;
+  @apply border border-chakana-sage/10;
+}
+
+/* Checkboxes (GFM Task Lists) */
+.prose-chakana input[type="checkbox"] {
+  @apply w-4 h-4 rounded border-chakana-sage/50 text-chakana-sage
+         focus:ring-chakana-sage/50 mr-2;
+}
+
+/* Definition Lists */
+.prose-chakana dl {
+  @apply my-4;
+}
+
+.prose-chakana dt {
+  @apply font-semibold text-chakana-dark dark:text-chakana-mint mb-1;
+}
+
+.prose-chakana dd {
+  @apply ml-4 mb-4 text-foreground/80;
+}
+
+/* Paragraphs */
+.prose-chakana p {
+  @apply my-4 leading-7;
+}
+
+/* First Paragraph */
+.prose-chakana > p:first-child {
+  @apply text-lg text-foreground/90 leading-8;
+}
+
+/* Sup/Sub */
+.prose-chakana sup {
+  @apply text-xs text-chakana-sage;
+}
+
+.prose-chakana sub {
+  @apply text-xs text-muted-foreground;
 }
 
 /* Premium Scrollbar */
@@ -408,6 +567,29 @@
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-chakana-sage/60;
+}
+
+/* Custom Scrollbar for modals/containers */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(74, 124, 89, 0.4) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-chakana-sage/30 rounded-full;
+  transition: background 0.2s;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-chakana-sage/50;
 }
 
 /* Selection */
