@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+/* Chakana Portal - Premium Design System v2.0 */
+/* Official Chakana La Experiencia Brand Identity */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,75 +9,75 @@
 
 @layer base {
   :root {
-    /* Chakana Brand - Light Mode */
-    --background: 40 33% 98%;
-    --foreground: 30 20% 15%;
+    /* Premium Light Mode - Chakana Official */
+    --background: 40 35% 99%;
+    --foreground: 207 35% 20%;
 
     --card: 0 0% 100%;
-    --card-foreground: 30 20% 15%;
+    --card-foreground: 207 35% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 30 20% 15%;
+    --popover-foreground: 207 35% 20%;
 
-    /* Primary: Earth Brown */
-    --primary: 30 40% 47%;
-    --primary-foreground: 40 33% 98%;
+    /* Primary: Chakana Gold #C5A54A */
+    --primary: 42 47% 53%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Sage Green */
-    --secondary: 85 80% 36%;
+    /* Secondary: Chakana Navy #223645 */
+    --secondary: 207 35% 20%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Accent: Inca Gold */
-    --accent: 48 96% 53%;
-    --accent-foreground: 30 20% 15%;
+    /* Accent: Gold Light */
+    --accent: 42 52% 60%;
+    --accent-foreground: 207 35% 20%;
 
-    --muted: 40 20% 94%;
-    --muted-foreground: 30 10% 45%;
+    --muted: 40 20% 96%;
+    --muted-foreground: 207 15% 45%;
 
-    /* Destructive: Terracotta */
-    --destructive: 21 90% 40%;
+    /* Destructive */
+    --destructive: 350 84% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 20% 85%;
-    --input: 30 20% 85%;
-    --ring: 30 40% 47%;
+    --border: 207 20% 88%;
+    --input: 207 20% 88%;
+    --ring: 42 47% 53%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
 
   .dark {
-    /* Chakana Brand - Dark Mode */
-    --background: 30 15% 10%;
-    --foreground: 40 20% 95%;
+    /* Premium Dark Mode - Chakana Official */
+    --background: 207 35% 10%;
+    --foreground: 40 35% 95%;
 
-    --card: 30 15% 13%;
-    --card-foreground: 40 20% 95%;
+    --card: 207 35% 13%;
+    --card-foreground: 40 35% 95%;
 
-    --popover: 30 15% 13%;
-    --popover-foreground: 40 20% 95%;
+    --popover: 207 35% 13%;
+    --popover-foreground: 40 35% 95%;
 
-    /* Primary: Earth Brown (lighter for dark) */
-    --primary: 30 50% 55%;
-    --primary-foreground: 30 15% 10%;
+    /* Primary: Chakana Gold (brighter for dark) */
+    --primary: 42 52% 58%;
+    --primary-foreground: 207 35% 10%;
 
-    /* Secondary: Sage Green */
-    --secondary: 85 70% 45%;
-    --secondary-foreground: 30 15% 10%;
+    /* Secondary: Gold variant */
+    --secondary: 42 40% 45%;
+    --secondary-foreground: 0 0% 100%;
 
-    /* Accent: Inca Gold */
-    --accent: 48 90% 50%;
-    --accent-foreground: 30 15% 10%;
+    /* Accent: Gold muted */
+    --accent: 42 35% 35%;
+    --accent-foreground: 40 35% 95%;
 
-    --muted: 30 15% 18%;
-    --muted-foreground: 40 10% 60%;
+    --muted: 207 25% 18%;
+    --muted-foreground: 40 15% 65%;
 
-    /* Destructive: Terracotta */
-    --destructive: 21 80% 50%;
+    /* Destructive */
+    --destructive: 350 75% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 15% 22%;
-    --input: 30 15% 22%;
-    --ring: 30 50% 55%;
+    --border: 207 25% 22%;
+    --input: 207 25% 22%;
+    --ring: 42 52% 58%;
   }
 }
 
@@ -82,49 +85,249 @@
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Poppins', system-ui, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
-  h1, h2, h3 {
-    @apply font-display;
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+
+  /* Premium Typography Scales */
+  h1 {
+    @apply text-4xl md:text-5xl font-bold;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl font-semibold;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl font-semibold;
   }
 }
 
 @layer components {
-  /* Navigation Rail */
+  /* Premium Navigation Rail */
   .nav-rail {
-    @apply fixed left-0 top-0 h-full w-[72px] bg-chakana-earth flex flex-col items-center py-4 z-50;
+    @apply fixed left-0 top-0 h-full w-20 bg-chakana-navy flex flex-col items-center py-6 z-50;
+    background: linear-gradient(180deg, #223645 0%, #192833 100%);
   }
 
   .nav-rail-item {
-    @apply w-12 h-12 rounded-xl flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200 cursor-pointer mb-2;
+    @apply w-14 h-14 rounded-2xl flex items-center justify-center text-white/60
+           hover:text-white hover:bg-white/10 transition-all duration-300 cursor-pointer mb-3
+           relative overflow-hidden;
+  }
+
+  .nav-rail-item::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, rgba(197, 165, 74, 0.2) 0%, transparent 100%);
+  }
+
+  .nav-rail-item:hover::before {
+    @apply opacity-100;
   }
 
   .nav-rail-item.active {
-    @apply bg-chakana-gold text-chakana-earth-dark;
+    @apply bg-chakana-gold text-chakana-navy shadow-gold-glow;
   }
 
-  /* Cards */
+  .nav-rail-item.active::before {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+    @apply opacity-100;
+  }
+
+  /* Premium Cards */
   .chakana-card {
-    @apply bg-card rounded-lg border border-border shadow-sm hover:shadow-md transition-shadow duration-200;
+    @apply bg-card rounded-2xl border border-border/50 shadow-premium
+           transition-all duration-300 overflow-hidden;
   }
 
-  /* Status Badges */
+  .chakana-card:hover {
+    @apply shadow-premium-lg border-chakana-gold/20;
+    transform: translateY(-2px);
+  }
+
+  .chakana-card-premium {
+    @apply chakana-card relative;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(253, 249, 243, 0.9) 100%);
+  }
+
+  .chakana-card-premium::before {
+    content: '';
+    @apply absolute top-0 left-0 right-0 h-1;
+    background: linear-gradient(90deg, #C5A54A 0%, #D4B85E 50%, #C5A54A 100%);
+  }
+
+  .dark .chakana-card-premium {
+    background: linear-gradient(135deg, rgba(34, 54, 69, 0.9) 0%, rgba(25, 40, 51, 0.9) 100%);
+  }
+
+  /* Premium Status Badges */
   .badge-success {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-chakana-sage/20 text-chakana-sage;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold
+           bg-chakana-emerald/15 text-chakana-emerald border border-chakana-emerald/20;
   }
 
   .badge-warning {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-chakana-gold/20 text-chakana-gold-dark;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold
+           bg-chakana-amber/15 text-chakana-amber border border-chakana-amber/20;
   }
 
   .badge-danger {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-chakana-terracotta/20 text-chakana-terracotta;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold
+           bg-chakana-rose/15 text-chakana-rose border border-chakana-rose/20;
   }
 
   .badge-info {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-chakana-sky/20 text-chakana-sky;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold
+           bg-chakana-azure/15 text-chakana-azure border border-chakana-azure/20;
+  }
+
+  .badge-gold {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold
+           bg-chakana-gold/15 text-chakana-gold-dark border border-chakana-gold/30;
+  }
+
+  /* Premium Buttons */
+  .btn-premium {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold
+           bg-chakana-gold text-chakana-navy shadow-gold-glow
+           hover:shadow-premium-lg transition-all duration-300;
+    background: linear-gradient(135deg, #C5A54A 0%, #D4B85E 50%, #C5A54A 100%);
+  }
+
+  .btn-premium:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #D4B85E 0%, #C5A54A 50%, #D4B85E 100%);
+  }
+
+  .btn-premium-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold
+           border-2 border-chakana-gold text-chakana-gold bg-transparent
+           hover:bg-chakana-gold hover:text-chakana-navy transition-all duration-300;
+  }
+
+  .btn-navy {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold
+           bg-chakana-navy text-white shadow-navy-glow
+           hover:bg-chakana-navy-light transition-all duration-300;
+  }
+
+  /* Premium Input Fields */
+  .input-premium {
+    @apply w-full px-4 py-3 rounded-xl border-2 border-border bg-background
+           focus:border-chakana-gold focus:ring-2 focus:ring-chakana-gold/20
+           transition-all duration-300 placeholder:text-muted-foreground/50;
+  }
+
+  /* Video Container */
+  .video-container {
+    @apply relative overflow-hidden rounded-2xl shadow-premium-lg;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  }
+
+  .video-container iframe {
+    @apply absolute top-0 left-0 w-full h-full;
+  }
+
+  /* Premium Divider */
+  .divider-gold {
+    @apply h-px w-full;
+    background: linear-gradient(90deg, transparent 0%, #C5A54A 50%, transparent 100%);
+  }
+
+  /* Gradient Text */
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #C5A54A 0%, #D4B85E 50%, #A68B3D 100%);
+  }
+
+  .text-gradient-premium {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #223645 0%, #C5A54A 100%);
+  }
+
+  /* Social Link Cards */
+  .social-link-card {
+    @apply flex items-center gap-4 p-4 rounded-xl bg-card border border-border/50
+           hover:border-chakana-gold/30 hover:shadow-gold-glow transition-all duration-300 cursor-pointer;
+  }
+
+  .social-link-card:hover {
+    transform: translateX(4px);
+  }
+
+  /* Testimonial Card */
+  .testimonial-card {
+    @apply relative overflow-hidden rounded-2xl bg-card border border-border/50
+           shadow-premium transition-all duration-500;
+  }
+
+  .testimonial-card:hover {
+    @apply shadow-premium-xl border-chakana-gold/30;
+  }
+
+  .testimonial-card::after {
+    content: '"';
+    @apply absolute -top-4 -left-2 text-9xl font-serif text-chakana-gold/10 pointer-events-none;
+  }
+
+  /* Metric Card */
+  .metric-card {
+    @apply relative overflow-hidden p-6 rounded-2xl bg-card border border-border/50 shadow-premium;
+  }
+
+  .metric-card::before {
+    content: '';
+    @apply absolute top-0 right-0 w-32 h-32 rounded-full -translate-y-1/2 translate-x-1/2;
+    background: radial-gradient(circle, rgba(197, 165, 74, 0.1) 0%, transparent 70%);
+  }
+
+  /* Section Header */
+  .section-header {
+    @apply relative pb-4 mb-8;
+  }
+
+  .section-header::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-20 h-1 rounded-full bg-chakana-gold;
+  }
+
+  /* Loading Shimmer */
+  .shimmer {
+    @apply relative overflow-hidden;
+    background: linear-gradient(
+      90deg,
+      rgba(197, 165, 74, 0.05) 0%,
+      rgba(197, 165, 74, 0.1) 50%,
+      rgba(197, 165, 74, 0.05) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* Stats Grid */
+  .stats-grid {
+    @apply grid grid-cols-2 md:grid-cols-4 gap-4;
+  }
+
+  .stat-item {
+    @apply p-4 rounded-xl bg-chakana-navy/5 dark:bg-chakana-gold/5 text-center;
+  }
+
+  .stat-value {
+    @apply text-2xl md:text-3xl font-bold text-chakana-gold;
+  }
+
+  .stat-label {
+    @apply text-sm text-muted-foreground mt-1;
   }
 }
 
@@ -134,31 +337,94 @@
 }
 
 .prose-chakana h1 {
-  @apply font-display text-chakana-earth dark:text-chakana-earth-light;
+  @apply font-display text-chakana-navy dark:text-chakana-gold;
 }
 
 .prose-chakana h2 {
-  @apply font-display text-chakana-earth-dark dark:text-chakana-earth;
+  @apply font-display text-chakana-navy-light dark:text-chakana-gold-light;
 }
 
 .prose-chakana a {
-  @apply text-chakana-sky hover:text-chakana-sky/80;
+  @apply text-chakana-gold hover:text-chakana-gold-dark underline-offset-4;
 }
 
 .prose-chakana strong {
-  @apply text-chakana-earth dark:text-chakana-gold;
+  @apply text-chakana-navy dark:text-chakana-gold;
 }
 
-/* Scrollbar styling */
+.prose-chakana blockquote {
+  @apply border-l-4 border-chakana-gold/50 bg-chakana-gold-50/50 dark:bg-chakana-navy/30
+         pl-6 py-4 rounded-r-lg italic;
+}
+
+/* Premium Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-muted;
+  @apply bg-muted rounded-full;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-chakana-earth/30 rounded-full hover:bg-chakana-earth/50;
+  @apply bg-chakana-gold/40 rounded-full;
+  transition: background 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-chakana-gold/60;
+}
+
+/* Selection */
+::selection {
+  @apply bg-chakana-gold/30 text-chakana-navy;
+}
+
+/* Focus Visible */
+:focus-visible {
+  @apply outline-none ring-2 ring-chakana-gold ring-offset-2 ring-offset-background;
+}
+
+/* Page Transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.4s ease-out;
+}
+
+/* Floating Label Pattern */
+.floating-label-group {
+  @apply relative;
+}
+
+.floating-label {
+  @apply absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none
+         transition-all duration-300;
+}
+
+.floating-label-group input:focus + .floating-label,
+.floating-label-group input:not(:placeholder-shown) + .floating-label {
+  @apply -translate-y-8 text-xs text-chakana-gold;
+}
+
+/* Hero Patterns */
+.hero-pattern {
+  background-image:
+    radial-gradient(ellipse at top right, rgba(197, 165, 74, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom left, rgba(34, 54, 69, 0.1) 0%, transparent 50%);
+}
+
+/* Glass Effect */
+.glass {
+  @apply bg-white/70 dark:bg-chakana-navy/70 backdrop-blur-xl;
+}
+
+.glass-gold {
+  @apply bg-chakana-gold/10 backdrop-blur-xl border border-chakana-gold/20;
 }

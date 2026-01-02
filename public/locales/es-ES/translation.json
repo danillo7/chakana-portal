@@ -19,6 +19,7 @@
   },
   "nav": {
     "dashboard": "Panel de Control",
+    "testimonials": "Testimonios",
     "documents": "Documentos",
     "projects": "Proyectos",
     "actions": "Acciones",
@@ -33,13 +34,23 @@
     "welcome": "Bienvenido de nuevo",
     "quickStats": "Estadísticas Rápidas",
     "recentActivity": "Actividad Reciente",
-    "upcomingActions": "Próximas Acciones",
-    "projectProgress": "Progreso del Proyecto",
+    "upcomingActions": "Acciones Urgentes",
+    "projectProgress": "Progreso de Proyectos",
     "metrics": {
       "totalInvestment": "Inversión Total",
       "activeProjects": "Proyectos Activos",
       "pendingActions": "Acciones Pendientes",
       "teamMembers": "Miembros del Equipo"
+    }
+  },
+  "testimonials": {
+    "title": "Testimonios",
+    "subtitle": "Experiencias de transformación",
+    "videoTestimonials": "Testimonios en Video",
+    "socialLinks": "Conecta con Chakana",
+    "cta": {
+      "title": "Tu Transformación te Espera",
+      "description": "Únete a cientos de personas que han descubierto una nueva forma de vivir."
     }
   },
   "documents": {
@@ -54,7 +65,7 @@
     },
     "filters": {
       "all": "Todos los documentos",
-      "recent": "Recientes",
+      "recent": "Documentos recientes",
       "byProject": "Por proyecto"
     }
   },
@@ -134,7 +145,7 @@
       "margin": "Margen"
     },
     "projections": "Proyecciones",
-    "breakdown": "Desglose"
+    "breakdown": "Desglose de Ingresos"
   },
   "auth": {
     "login": "Iniciar Sesión",

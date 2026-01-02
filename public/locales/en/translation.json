@@ -19,6 +19,7 @@
   },
   "nav": {
     "dashboard": "Dashboard",
+    "testimonials": "Testimonials",
     "documents": "Documents",
     "projects": "Projects",
     "actions": "Actions",
@@ -33,13 +34,23 @@
     "welcome": "Welcome back",
     "quickStats": "Quick Stats",
     "recentActivity": "Recent Activity",
-    "upcomingActions": "Upcoming Actions",
+    "upcomingActions": "Urgent Actions",
     "projectProgress": "Project Progress",
     "metrics": {
       "totalInvestment": "Total Investment",
       "activeProjects": "Active Projects",
       "pendingActions": "Pending Actions",
       "teamMembers": "Team Members"
+    }
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "subtitle": "Transformation experiences",
+    "videoTestimonials": "Video Testimonials",
+    "socialLinks": "Connect with Chakana",
+    "cta": {
+      "title": "Your Transformation Awaits",
+      "description": "Join hundreds of people who have discovered a new way of living."
     }
   },
   "documents": {
@@ -134,7 +145,7 @@
       "margin": "Margin"
     },
     "projections": "Projections",
-    "breakdown": "Breakdown"
+    "breakdown": "Revenue Breakdown"
   },
   "auth": {
     "login": "Sign In",
