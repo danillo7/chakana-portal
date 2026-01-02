@@ -15,7 +15,12 @@
     "all": "Todos",
     "none": "Nenhum",
     "yes": "Sim",
-    "no": "Não"
+    "no": "Não",
+    "new": "Novo",
+    "view": "Ver",
+    "download": "Baixar",
+    "close": "Fechar",
+    "open": "Abrir"
   },
   "nav": {
     "dashboard": "Painel de Controle",
@@ -67,7 +72,9 @@
       "all": "Todos os documentos",
       "recent": "Recentes",
       "byProject": "Por projeto"
-    }
+    },
+    "project": "Projeto associado",
+    "noContent": "Sem conteúdo adicional disponível"
   },
   "projects": {
     "title": "Projetos",
