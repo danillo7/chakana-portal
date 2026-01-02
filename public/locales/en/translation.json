@@ -15,7 +15,12 @@
     "all": "All",
     "none": "None",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "new": "New",
+    "view": "View",
+    "download": "Download",
+    "close": "Close",
+    "open": "Open"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -67,7 +72,9 @@
       "all": "All documents",
       "recent": "Recent",
       "byProject": "By project"
-    }
+    },
+    "project": "Associated project",
+    "noContent": "No additional content available"
   },
   "projects": {
     "title": "Projects",

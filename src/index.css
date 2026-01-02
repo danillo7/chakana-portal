@@ -1,5 +1,5 @@
-/* Chakana Portal - Premium Design System v2.0 */
-/* Official Chakana La Experiencia Brand Identity */
+/* Chakana Portal - Premium Design System v3.0 */
+/* Official Chakana La Experiencia Brand Identity - Based on Logo */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
@@ -9,75 +9,75 @@
 
 @layer base {
   :root {
-    /* Premium Light Mode - Chakana Official */
-    --background: 40 35% 99%;
-    --foreground: 207 35% 20%;
+    /* Premium Light Mode - Chakana Official (Mint Theme) */
+    --background: 160 20% 98%;
+    --foreground: 0 0% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 207 35% 20%;
+    --card-foreground: 0 0% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 207 35% 20%;
+    --popover-foreground: 0 0% 10%;
 
-    /* Primary: Chakana Gold #C5A54A */
-    --primary: 42 47% 53%;
+    /* Primary: Chakana Sage Green #4A7C59 */
+    --primary: 140 26% 39%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Chakana Navy #223645 */
-    --secondary: 207 35% 20%;
+    /* Secondary: Chakana Dark #1A1A1A */
+    --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Accent: Gold Light */
-    --accent: 42 52% 60%;
-    --accent-foreground: 207 35% 20%;
+    /* Accent: Chakana Mint #D4E4E1 */
+    --accent: 165 22% 86%;
+    --accent-foreground: 0 0% 10%;
 
-    --muted: 40 20% 96%;
-    --muted-foreground: 207 15% 45%;
+    --muted: 160 15% 95%;
+    --muted-foreground: 0 0% 40%;
 
     /* Destructive */
     --destructive: 350 84% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 207 20% 88%;
-    --input: 207 20% 88%;
-    --ring: 42 47% 53%;
+    --border: 160 15% 88%;
+    --input: 160 15% 88%;
+    --ring: 140 26% 39%;
 
     --radius: 0.75rem;
   }
 
   .dark {
     /* Premium Dark Mode - Chakana Official */
-    --background: 207 35% 10%;
-    --foreground: 40 35% 95%;
+    --background: 0 0% 8%;
+    --foreground: 160 20% 95%;
 
-    --card: 207 35% 13%;
-    --card-foreground: 40 35% 95%;
+    --card: 0 0% 11%;
+    --card-foreground: 160 20% 95%;
 
-    --popover: 207 35% 13%;
-    --popover-foreground: 40 35% 95%;
+    --popover: 0 0% 11%;
+    --popover-foreground: 160 20% 95%;
 
-    /* Primary: Chakana Gold (brighter for dark) */
-    --primary: 42 52% 58%;
-    --primary-foreground: 207 35% 10%;
+    /* Primary: Sage Green (brighter for dark) */
+    --primary: 140 30% 45%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Gold variant */
-    --secondary: 42 40% 45%;
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary: Mint variant */
+    --secondary: 165 20% 75%;
+    --secondary-foreground: 0 0% 10%;
 
-    /* Accent: Gold muted */
-    --accent: 42 35% 35%;
-    --accent-foreground: 40 35% 95%;
+    /* Accent: Sage muted */
+    --accent: 140 20% 20%;
+    --accent-foreground: 160 20% 95%;
 
-    --muted: 207 25% 18%;
-    --muted-foreground: 40 15% 65%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 160 10% 60%;
 
     /* Destructive */
     --destructive: 350 75% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 207 25% 22%;
-    --input: 207 25% 22%;
-    --ring: 42 52% 58%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 140 30% 45%;
   }
 }
 
@@ -97,25 +97,16 @@
     font-family: 'Poppins', system-ui, sans-serif;
   }
 
-  /* Premium Typography Scales */
-  h1 {
-    @apply text-4xl md:text-5xl font-bold;
-  }
-
-  h2 {
-    @apply text-3xl md:text-4xl font-semibold;
-  }
-
-  h3 {
-    @apply text-2xl md:text-3xl font-semibold;
-  }
+  h1 { @apply text-4xl md:text-5xl font-bold; }
+  h2 { @apply text-3xl md:text-4xl font-semibold; }
+  h3 { @apply text-2xl md:text-3xl font-semibold; }
 }
 
 @layer components {
-  /* Premium Navigation Rail */
+  /* Premium Navigation Rail - Chakana Dark Theme */
   .nav-rail {
-    @apply fixed left-0 top-0 h-full w-20 bg-chakana-navy flex flex-col items-center py-6 z-50;
-    background: linear-gradient(180deg, #223645 0%, #192833 100%);
+    @apply fixed left-0 top-0 h-full w-20 flex flex-col items-center py-6 z-50;
+    background: linear-gradient(180deg, #1A1A1A 0%, #2D2D2D 100%);
   }
 
   .nav-rail-item {
@@ -127,7 +118,7 @@
   .nav-rail-item::before {
     content: '';
     @apply absolute inset-0 opacity-0 transition-opacity duration-300;
-    background: linear-gradient(135deg, rgba(197, 165, 74, 0.2) 0%, transparent 100%);
+    background: linear-gradient(135deg, rgba(74, 124, 89, 0.3) 0%, transparent 100%);
   }
 
   .nav-rail-item:hover::before {
@@ -135,38 +126,53 @@
   }
 
   .nav-rail-item.active {
-    @apply bg-chakana-gold text-chakana-navy shadow-gold-glow;
+    @apply text-chakana-dark shadow-sage-glow;
+    background: linear-gradient(135deg, #D4E4E1 0%, #B8CFC9 100%);
   }
 
   .nav-rail-item.active::before {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
     @apply opacity-100;
   }
 
-  /* Premium Cards */
+  /* Premium Cards - Mint Accent */
   .chakana-card {
     @apply bg-card rounded-2xl border border-border/50 shadow-premium
            transition-all duration-300 overflow-hidden;
   }
 
   .chakana-card:hover {
-    @apply shadow-premium-lg border-chakana-gold/20;
+    @apply shadow-premium-lg border-chakana-sage/30;
     transform: translateY(-2px);
   }
 
   .chakana-card-premium {
     @apply chakana-card relative;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(253, 249, 243, 0.9) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(212, 228, 225, 0.3) 100%);
   }
 
   .chakana-card-premium::before {
     content: '';
     @apply absolute top-0 left-0 right-0 h-1;
-    background: linear-gradient(90deg, #C5A54A 0%, #D4B85E 50%, #C5A54A 100%);
+    background: linear-gradient(90deg, #4A7C59 0%, #5E9370 50%, #4A7C59 100%);
   }
 
   .dark .chakana-card-premium {
-    background: linear-gradient(135deg, rgba(34, 54, 69, 0.9) 0%, rgba(25, 40, 51, 0.9) 100%);
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(45, 45, 45, 0.9) 100%);
+  }
+
+  /* Document Card - Clickable */
+  .document-card {
+    @apply relative overflow-hidden p-6 rounded-2xl bg-card border border-border/50 shadow-premium
+           cursor-pointer transition-all duration-300;
+  }
+
+  .document-card:hover {
+    @apply shadow-premium-lg border-chakana-sage/40 -translate-y-1;
+  }
+
+  .document-card:active {
+    @apply scale-[0.98];
   }
 
   /* Premium Status Badges */
@@ -190,74 +196,87 @@
            bg-chakana-azure/15 text-chakana-azure border border-chakana-azure/20;
   }
 
+  .badge-sage {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold
+           bg-chakana-sage/15 text-chakana-sage border border-chakana-sage/30;
+  }
+
+  .badge-mint {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold
+           bg-chakana-mint/50 text-chakana-dark border border-chakana-mint-dark/30;
+  }
+
   .badge-gold {
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold
            bg-chakana-gold/15 text-chakana-gold-dark border border-chakana-gold/30;
   }
 
-  /* Premium Buttons */
+  /* Premium Buttons - Sage Theme */
   .btn-premium {
     @apply inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold
-           bg-chakana-gold text-chakana-navy shadow-gold-glow
-           hover:shadow-premium-lg transition-all duration-300;
-    background: linear-gradient(135deg, #C5A54A 0%, #D4B85E 50%, #C5A54A 100%);
+           text-white shadow-sage-glow hover:shadow-premium-lg transition-all duration-300;
+    background: linear-gradient(135deg, #4A7C59 0%, #5E9370 50%, #4A7C59 100%);
   }
 
   .btn-premium:hover {
     transform: translateY(-2px);
-    background: linear-gradient(135deg, #D4B85E 0%, #C5A54A 50%, #D4B85E 100%);
+    background: linear-gradient(135deg, #5E9370 0%, #4A7C59 50%, #5E9370 100%);
   }
 
   .btn-premium-outline {
     @apply inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold
-           border-2 border-chakana-gold text-chakana-gold bg-transparent
-           hover:bg-chakana-gold hover:text-chakana-navy transition-all duration-300;
+           border-2 border-chakana-sage text-chakana-sage bg-transparent
+           hover:bg-chakana-sage hover:text-white transition-all duration-300;
   }
 
-  .btn-navy {
+  .btn-dark {
     @apply inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold
-           bg-chakana-navy text-white shadow-navy-glow
-           hover:bg-chakana-navy-light transition-all duration-300;
+           bg-chakana-dark text-white shadow-dark-glow
+           hover:bg-chakana-dark-light transition-all duration-300;
+  }
+
+  .btn-mint {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold
+           bg-chakana-mint text-chakana-dark hover:bg-chakana-mint-dark transition-all duration-300;
   }
 
   /* Premium Input Fields */
   .input-premium {
     @apply w-full px-4 py-3 rounded-xl border-2 border-border bg-background
-           focus:border-chakana-gold focus:ring-2 focus:ring-chakana-gold/20
+           focus:border-chakana-sage focus:ring-2 focus:ring-chakana-sage/20
            transition-all duration-300 placeholder:text-muted-foreground/50;
   }
 
   /* Video Container */
   .video-container {
     @apply relative overflow-hidden rounded-2xl shadow-premium-lg;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    padding-bottom: 56.25%;
   }
 
   .video-container iframe {
     @apply absolute top-0 left-0 w-full h-full;
   }
 
-  /* Premium Divider */
-  .divider-gold {
-    @apply h-px w-full;
-    background: linear-gradient(90deg, transparent 0%, #C5A54A 50%, transparent 100%);
+  /* Gradient Text */
+  .text-gradient-sage {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #4A7C59 0%, #5E9370 50%, #3A6147 100%);
   }
 
-  /* Gradient Text */
+  .text-gradient-chakana {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #1A1A1A 0%, #4A7C59 100%);
+  }
+
   .text-gradient-gold {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, #C5A54A 0%, #D4B85E 50%, #A68B3D 100%);
   }
 
-  .text-gradient-premium {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, #223645 0%, #C5A54A 100%);
-  }
-
   /* Social Link Cards */
   .social-link-card {
     @apply flex items-center gap-4 p-4 rounded-xl bg-card border border-border/50
-           hover:border-chakana-gold/30 hover:shadow-gold-glow transition-all duration-300 cursor-pointer;
+           hover:border-chakana-sage/40 hover:shadow-sage-glow transition-all duration-300 cursor-pointer;
   }
 
   .social-link-card:hover {
@@ -271,12 +290,12 @@
   }
 
   .testimonial-card:hover {
-    @apply shadow-premium-xl border-chakana-gold/30;
+    @apply shadow-premium-xl border-chakana-sage/40;
   }
 
   .testimonial-card::after {
     content: '"';
-    @apply absolute -top-4 -left-2 text-9xl font-serif text-chakana-gold/10 pointer-events-none;
+    @apply absolute -top-4 -left-2 text-9xl font-serif text-chakana-sage/10 pointer-events-none;
   }
 
   /* Metric Card */
@@ -287,7 +306,7 @@
   .metric-card::before {
     content: '';
     @apply absolute top-0 right-0 w-32 h-32 rounded-full -translate-y-1/2 translate-x-1/2;
-    background: radial-gradient(circle, rgba(197, 165, 74, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(74, 124, 89, 0.1) 0%, transparent 70%);
   }
 
   /* Section Header */
@@ -297,7 +316,13 @@
 
   .section-header::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-20 h-1 rounded-full bg-chakana-gold;
+    @apply absolute bottom-0 left-0 w-20 h-1 rounded-full bg-chakana-sage;
+  }
+
+  /* Premium Divider */
+  .divider-sage {
+    @apply h-px w-full;
+    background: linear-gradient(90deg, transparent 0%, #4A7C59 50%, transparent 100%);
   }
 
   /* Loading Shimmer */
@@ -305,9 +330,9 @@
     @apply relative overflow-hidden;
     background: linear-gradient(
       90deg,
-      rgba(197, 165, 74, 0.05) 0%,
-      rgba(197, 165, 74, 0.1) 50%,
-      rgba(197, 165, 74, 0.05) 100%
+      rgba(74, 124, 89, 0.05) 0%,
+      rgba(74, 124, 89, 0.1) 50%,
+      rgba(74, 124, 89, 0.05) 100%
     );
     background-size: 200% 100%;
     animation: shimmer 2s linear infinite;
@@ -319,15 +344,24 @@
   }
 
   .stat-item {
-    @apply p-4 rounded-xl bg-chakana-navy/5 dark:bg-chakana-gold/5 text-center;
+    @apply p-4 rounded-xl bg-chakana-mint/30 dark:bg-chakana-sage/10 text-center;
   }
 
   .stat-value {
-    @apply text-2xl md:text-3xl font-bold text-chakana-gold;
+    @apply text-2xl md:text-3xl font-bold text-chakana-sage;
   }
 
   .stat-label {
     @apply text-sm text-muted-foreground mt-1;
+  }
+
+  /* Modal Overlay */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4;
+  }
+
+  .modal-content {
+    @apply bg-card rounded-3xl shadow-premium-xl max-w-4xl w-full max-h-[90vh] overflow-hidden;
   }
 }
 
@@ -337,23 +371,23 @@
 }
 
 .prose-chakana h1 {
-  @apply font-display text-chakana-navy dark:text-chakana-gold;
+  @apply font-display text-chakana-dark dark:text-chakana-mint;
 }
 
 .prose-chakana h2 {
-  @apply font-display text-chakana-navy-light dark:text-chakana-gold-light;
+  @apply font-display text-chakana-dark-light dark:text-chakana-mint-light;
 }
 
 .prose-chakana a {
-  @apply text-chakana-gold hover:text-chakana-gold-dark underline-offset-4;
+  @apply text-chakana-sage hover:text-chakana-sage-dark underline-offset-4;
 }
 
 .prose-chakana strong {
-  @apply text-chakana-navy dark:text-chakana-gold;
+  @apply text-chakana-dark dark:text-chakana-mint;
 }
 
 .prose-chakana blockquote {
-  @apply border-l-4 border-chakana-gold/50 bg-chakana-gold-50/50 dark:bg-chakana-navy/30
+  @apply border-l-4 border-chakana-sage/50 bg-chakana-mint/30 dark:bg-chakana-sage/10
          pl-6 py-4 rounded-r-lg italic;
 }
 
@@ -368,63 +402,50 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-chakana-gold/40 rounded-full;
+  @apply bg-chakana-sage/40 rounded-full;
   transition: background 0.2s;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-chakana-gold/60;
+  @apply bg-chakana-sage/60;
 }
 
 /* Selection */
 ::selection {
-  @apply bg-chakana-gold/30 text-chakana-navy;
+  @apply bg-chakana-sage/30 text-chakana-dark;
 }
 
 /* Focus Visible */
 :focus-visible {
-  @apply outline-none ring-2 ring-chakana-gold ring-offset-2 ring-offset-background;
+  @apply outline-none ring-2 ring-chakana-sage ring-offset-2 ring-offset-background;
 }
 
-/* Page Transitions */
-.page-enter {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.page-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.4s ease-out;
-}
-
-/* Floating Label Pattern */
-.floating-label-group {
-  @apply relative;
-}
-
-.floating-label {
-  @apply absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none
-         transition-all duration-300;
-}
-
-.floating-label-group input:focus + .floating-label,
-.floating-label-group input:not(:placeholder-shown) + .floating-label {
-  @apply -translate-y-8 text-xs text-chakana-gold;
-}
-
-/* Hero Patterns */
+/* Hero Pattern */
 .hero-pattern {
   background-image:
-    radial-gradient(ellipse at top right, rgba(197, 165, 74, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at bottom left, rgba(34, 54, 69, 0.1) 0%, transparent 50%);
+    radial-gradient(ellipse at top right, rgba(74, 124, 89, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom left, rgba(212, 228, 225, 0.3) 0%, transparent 50%);
 }
 
 /* Glass Effect */
 .glass {
-  @apply bg-white/70 dark:bg-chakana-navy/70 backdrop-blur-xl;
+  @apply bg-white/70 dark:bg-chakana-dark/70 backdrop-blur-xl;
 }
 
-.glass-gold {
-  @apply bg-chakana-gold/10 backdrop-blur-xl border border-chakana-gold/20;
+.glass-mint {
+  @apply bg-chakana-mint/30 backdrop-blur-xl border border-chakana-mint-dark/20;
+}
+
+.glass-sage {
+  @apply bg-chakana-sage/10 backdrop-blur-xl border border-chakana-sage/20;
+}
+
+/* Chakana Symbol Animation */
+@keyframes chakana-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.chakana-symbol {
+  animation: chakana-rotate 20s linear infinite;
 }

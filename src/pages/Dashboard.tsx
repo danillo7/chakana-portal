@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '../co
 import { Badge } from '../components/ui/badge'
 import { useDataStore } from '../stores/dataStore'
 import { formatCurrency, formatDateShort } from '../lib/utils'
+import { useGreeting, useWeather } from '../hooks/useGreeting'
 import {
   DollarSign,
   FolderKanban,
@@ -14,7 +15,6 @@ import {
   AlertCircle,
   Play,
   ArrowRight,
-  Sparkles,
   Mountain,
   Globe,
   Instagram,
@@ -22,6 +22,8 @@ import {
   Star,
   ExternalLink,
   CalendarDays,
+  MapPin,
+  FileText,
 } from 'lucide-react'
 
 // Quick links to social
@@ -30,13 +32,19 @@ const quickLinks = [
     name: 'Web Oficial',
     url: 'https://chakanalaexperiencia.es/',
     icon: Globe,
-    color: '#C5A54A',
+    color: '#4A7C59',
   },
   {
-    name: 'Instagram',
-    url: 'https://www.instagram.com/ivann.silvaaa/',
+    name: 'Instagram Chakana',
+    url: 'https://www.instagram.com/chakana_le/',
     icon: Instagram,
     color: '#E1306C',
+  },
+  {
+    name: 'Instagram Iván',
+    url: 'https://www.instagram.com/ivansilvam_/',
+    icon: Instagram,
+    color: '#833AB4',
   },
   {
     name: 'WhatsApp',
@@ -59,6 +67,8 @@ const nextRetreat = {
 export function Dashboard() {
   const { t, i18n } = useTranslation()
   const { projects, actions, stakeholders, documents } = useDataStore()
+  const { greeting, emoji, timeString } = useGreeting(i18n.language)
+  const weather = useWeather()
 
   // Calculate metrics
   const totalInvestment = projects.reduce((sum, p) => sum + (p.budget || 0), 0)
@@ -78,33 +88,53 @@ export function Dashboard() {
 
   return (
     <div className="space-y-8 animate-fade-in">
-      {/* Premium Hero Section */}
-      <div className="relative overflow-hidden rounded-3xl bg-chakana-navy p-8 md:p-10">
+      {/* Premium Hero Section - Chakana Brand */}
+      <div className="relative overflow-hidden rounded-3xl bg-chakana-dark p-8 md:p-10">
         {/* Background Effects */}
-        <div className="absolute inset-0 bg-gradient-radial-gold opacity-40" />
-        <div className="absolute top-0 right-0 w-80 h-80 bg-chakana-gold/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-chakana-gold/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+        <div className="absolute inset-0 bg-gradient-radial-sage opacity-40" />
+        <div className="absolute top-0 right-0 w-80 h-80 bg-chakana-sage/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-chakana-mint/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
         <div className="relative z-10">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-2xl bg-chakana-gold flex items-center justify-center shadow-gold-glow">
-                  <Sparkles className="w-6 h-6 text-chakana-navy" />
+              {/* Dynamic Time & Weather Display */}
+              <div className="flex items-center gap-4 mb-4 text-white/60 text-sm">
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4" />
+                  <span>{timeString}</span>
+                  <span className="text-white/40">|</span>
+                  <MapPin className="w-4 h-4" />
+                  <span>Valencia, ES</span>
                 </div>
-                <Badge className="badge-gold">
+                {weather && (
+                  <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/10">
+                    <span>{weather.icon}</span>
+                    <span>{weather.temp}°C</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-2xl overflow-hidden shadow-sage-glow">
+                  <img
+                    src="/logo-chakana.jpg"
+                    alt="Chakana"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <Badge className="badge-sage">
                   <Star className="w-3 h-3 mr-1" />
                   Portal Premium
                 </Badge>
               </div>
 
               <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                Bienvenido al{' '}
-                <span className="text-gradient-gold">Portal Chakana</span>
+                {greeting} {emoji}{' '}
+                <span className="text-gradient-sage">Portal Chakana</span>
               </h1>
               <p className="text-white/70 text-lg max-w-xl">
-                Centro de gestión estratégica para la colaboración internacional
-                entre Dr. Danillo Costa e Iván Silva.
+                {t('dashboard.subtitle')}
               </p>
             </div>
 
@@ -149,18 +179,18 @@ export function Dashboard() {
         </div>
 
         {/* Active Projects */}
-        <div className="metric-card group hover:border-chakana-navy/30 transition-all duration-300">
+        <div className="metric-card group hover:border-chakana-sage/30 transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-14 h-14 rounded-2xl bg-chakana-navy/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              <FolderKanban className="w-7 h-7 text-chakana-navy" />
+            <div className="w-14 h-14 rounded-2xl bg-chakana-sage/15 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <FolderKanban className="w-7 h-7 text-chakana-sage" />
             </div>
-            <Badge className="badge-info">{activeProjects} activos</Badge>
+            <Badge className="badge-sage">{activeProjects} {t('projects.status.inProgress').toLowerCase()}</Badge>
           </div>
           <p className="text-sm font-medium text-muted-foreground mb-1">
             {t('dashboard.metrics.activeProjects')}
           </p>
           <p className="text-3xl font-bold text-foreground">
-            {projects.length} <span className="text-lg text-muted-foreground">proyectos</span>
+            {projects.length}
           </p>
         </div>
 
@@ -170,13 +200,13 @@ export function Dashboard() {
             <div className="w-14 h-14 rounded-2xl bg-chakana-amber/15 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <CheckSquare className="w-7 h-7 text-chakana-amber" />
             </div>
-            <Badge className="badge-warning">Pendientes</Badge>
+            <Badge className="badge-warning">{t('actions.status.pending')}</Badge>
           </div>
           <p className="text-sm font-medium text-muted-foreground mb-1">
             {t('dashboard.metrics.pendingActions')}
           </p>
           <p className="text-3xl font-bold text-foreground">
-            {pendingActions} <span className="text-lg text-muted-foreground">tareas</span>
+            {pendingActions}
           </p>
         </div>
 
@@ -186,13 +216,13 @@ export function Dashboard() {
             <div className="w-14 h-14 rounded-2xl bg-chakana-azure/15 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <Users className="w-7 h-7 text-chakana-azure" />
             </div>
-            <Badge className="badge-info">Equipo</Badge>
+            <Badge className="badge-info">{t('nav.stakeholders')}</Badge>
           </div>
           <p className="text-sm font-medium text-muted-foreground mb-1">
             {t('dashboard.metrics.teamMembers')}
           </p>
           <p className="text-3xl font-bold text-foreground">
-            {teamMembers} <span className="text-lg text-muted-foreground">miembros</span>
+            {teamMembers}
           </p>
         </div>
       </div>
@@ -204,16 +234,16 @@ export function Dashboard() {
           <CardHeader className="pb-4">
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-3 text-xl">
-                <div className="w-10 h-10 rounded-xl bg-chakana-gold/15 flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5 text-chakana-gold" />
+                <div className="w-10 h-10 rounded-xl bg-chakana-sage/15 flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5 text-chakana-sage" />
                 </div>
                 {t('dashboard.projectProgress')}
               </CardTitle>
               <Link
                 to="/projects"
-                className="text-sm text-chakana-gold hover:text-chakana-gold-dark flex items-center gap-1 transition-colors"
+                className="text-sm text-chakana-sage hover:text-chakana-sage-dark flex items-center gap-1 transition-colors"
               >
-                Ver todos <ArrowRight className="w-4 h-4" />
+                {t('common.view')} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </CardHeader>
@@ -227,7 +257,7 @@ export function Dashboard() {
                         className="w-4 h-4 rounded-full shadow-sm"
                         style={{ backgroundColor: project.color }}
                       />
-                      <span className="font-semibold text-foreground group-hover:text-chakana-gold transition-colors">
+                      <span className="font-semibold text-foreground group-hover:text-chakana-sage transition-colors">
                         {project.name}
                       </span>
                     </div>
@@ -259,10 +289,10 @@ export function Dashboard() {
         <Card className="chakana-card-premium">
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-3 text-xl">
-              <div className="w-10 h-10 rounded-xl bg-chakana-navy/10 flex items-center justify-center">
-                <Mountain className="w-5 h-5 text-chakana-navy" />
+              <div className="w-10 h-10 rounded-xl bg-chakana-sage/15 flex items-center justify-center">
+                <Mountain className="w-5 h-5 text-chakana-sage" />
               </div>
-              Próximo Retiro
+              {t('dashboard.nextRetreat', { defaultValue: 'Próximo Retiro' })}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -276,15 +306,15 @@ export function Dashboard() {
             </div>
 
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-chakana-gold">{nextRetreat.earlyBird}</span>
+              <span className="text-3xl font-bold text-chakana-sage">{nextRetreat.earlyBird}</span>
               <span className="text-sm text-muted-foreground line-through">{nextRetreat.price}</span>
               <Badge className="badge-success ml-2">Early Bird</Badge>
             </div>
 
-            <div className="p-3 rounded-xl bg-chakana-gold/10 border border-chakana-gold/20">
+            <div className="p-3 rounded-xl bg-chakana-sage/10 border border-chakana-sage/20">
               <p className="text-sm text-center">
-                <span className="font-bold text-chakana-gold">{nextRetreat.spotsLeft} plazas</span>
-                <span className="text-muted-foreground"> disponibles</span>
+                <span className="font-bold text-chakana-sage">{nextRetreat.spotsLeft} {t('dashboard.spots', { defaultValue: 'plazas' })}</span>
+                <span className="text-muted-foreground"> {t('dashboard.available', { defaultValue: 'disponibles' })}</span>
               </p>
             </div>
 
@@ -295,7 +325,7 @@ export function Dashboard() {
               className="btn-premium w-full"
             >
               <ExternalLink className="w-4 h-4 mr-2" />
-              Ver Detalles
+              {t('common.view')}
             </a>
           </CardContent>
         </Card>
@@ -315,9 +345,9 @@ export function Dashboard() {
               </CardTitle>
               <Link
                 to="/actions"
-                className="text-sm text-chakana-gold hover:text-chakana-gold-dark flex items-center gap-1 transition-colors"
+                className="text-sm text-chakana-sage hover:text-chakana-sage-dark flex items-center gap-1 transition-colors"
               >
-                Ver todas <ArrowRight className="w-4 h-4" />
+                {t('common.view')} <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </CardHeader>
@@ -326,11 +356,11 @@ export function Dashboard() {
               {urgentActions.map((action) => (
                 <div
                   key={action.id}
-                  className="p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-all duration-300 border border-transparent hover:border-chakana-gold/20 group cursor-pointer"
+                  className="p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-all duration-300 border border-transparent hover:border-chakana-sage/20 group cursor-pointer"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-foreground group-hover:text-chakana-gold transition-colors truncate">
+                      <p className="font-semibold text-foreground group-hover:text-chakana-sage transition-colors truncate">
                         {action.title}
                       </p>
                       <div className="flex items-center gap-2 mt-2">
@@ -349,7 +379,7 @@ export function Dashboard() {
               {urgentActions.length === 0 && (
                 <div className="text-center py-8">
                   <CheckSquare className="w-12 h-12 text-chakana-emerald/30 mx-auto mb-3" />
-                  <p className="text-muted-foreground">No hay acciones urgentes</p>
+                  <p className="text-muted-foreground">{t('dashboard.noUrgentActions', { defaultValue: 'No hay acciones urgentes' })}</p>
                 </div>
               )}
             </div>
@@ -360,28 +390,27 @@ export function Dashboard() {
         <Card className="chakana-card overflow-hidden">
           <div className="relative h-full min-h-[300px] flex flex-col">
             {/* Background gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-chakana-navy via-chakana-navy-light to-chakana-navy" />
-            <div className="absolute inset-0 bg-gradient-radial-gold opacity-30" />
+            <div className="absolute inset-0 bg-gradient-to-br from-chakana-dark via-chakana-dark-light to-chakana-dark" />
+            <div className="absolute inset-0 bg-gradient-radial-sage opacity-30" />
 
             <CardContent className="relative z-10 flex-1 flex flex-col justify-center p-8">
-              <Badge className="badge-gold w-fit mb-4">
+              <Badge className="badge-sage w-fit mb-4">
                 <Play className="w-3 h-3 mr-1" />
-                Nuevo
+                {t('common.new')}
               </Badge>
 
               <h3 className="text-2xl font-bold text-white mb-3">
-                Testimonios de{' '}
-                <span className="text-chakana-gold">Transformación</span>
+                {t('testimonials.title')}{' '}
+                <span className="text-chakana-mint">{t('testimonials.subtitle')}</span>
               </h3>
 
               <p className="text-white/70 mb-6">
-                Descubre las experiencias de quienes han vivido la magia Chakana.
-                Videos reales de participantes.
+                {t('testimonials.cta.description')}
               </p>
 
               <Link to="/testimonials" className="btn-premium w-fit">
                 <Play className="w-4 h-4 mr-2" />
-                Ver Testimonios
+                {t('common.view')} {t('nav.testimonials')}
               </Link>
             </CardContent>
           </div>
@@ -392,33 +421,39 @@ export function Dashboard() {
       <Card className="chakana-card">
         <CardHeader className="pb-4">
           <div className="flex items-center justify-between">
-            <div>
-              <CardTitle className="text-xl">{t('dashboard.recentActivity')}</CardTitle>
-              <CardDescription className="mt-1">
-                {t('documents.filters.recent')}
-              </CardDescription>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-chakana-sage/15 flex items-center justify-center">
+                <FileText className="w-5 h-5 text-chakana-sage" />
+              </div>
+              <div>
+                <CardTitle className="text-xl">{t('dashboard.recentActivity')}</CardTitle>
+                <CardDescription className="mt-1">
+                  {t('documents.filters.recent')}
+                </CardDescription>
+              </div>
             </div>
             <Link
               to="/documents"
-              className="text-sm text-chakana-gold hover:text-chakana-gold-dark flex items-center gap-1 transition-colors"
+              className="text-sm text-chakana-sage hover:text-chakana-sage-dark flex items-center gap-1 transition-colors"
             >
-              Ver todos <ArrowRight className="w-4 h-4" />
+              {t('common.view')} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {recentDocs.map((doc) => (
-              <div
+              <Link
                 key={doc.id}
-                className="p-5 rounded-2xl border border-border/50 hover:border-chakana-gold/30 hover:shadow-premium transition-all duration-300 cursor-pointer group"
+                to="/documents"
+                className="p-5 rounded-2xl border border-border/50 hover:border-chakana-sage/30 hover:shadow-sage-glow transition-all duration-300 cursor-pointer group"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-chakana-gold/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 rounded-xl bg-chakana-sage/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
                     <span className="text-2xl">📄</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-foreground group-hover:text-chakana-gold transition-colors truncate">
+                    <p className="font-semibold text-foreground group-hover:text-chakana-sage transition-colors truncate">
                       {doc.title}
                     </p>
                     <p className="text-sm text-muted-foreground mt-1">
@@ -433,7 +468,7 @@ export function Dashboard() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </CardContent>

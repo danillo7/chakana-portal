@@ -50,11 +50,18 @@ const socialLinks = [
     color: '#C5A54A',
   },
   {
-    name: 'Instagram',
-    description: '@ivann.silvaaa • 93K seguidores',
-    url: 'https://www.instagram.com/ivann.silvaaa/',
+    name: 'Instagram Chakana',
+    description: '@chakana_le',
+    url: 'https://www.instagram.com/chakana_le/',
     icon: Instagram,
     color: '#E1306C',
+  },
+  {
+    name: 'Instagram Iván',
+    description: '@ivansilvam_',
+    url: 'https://www.instagram.com/ivansilvam_/',
+    icon: Instagram,
+    color: '#833AB4',
   },
   {
     name: 'Canal WhatsApp',
@@ -178,7 +185,7 @@ export function TestimonialsPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {socialLinks.map((link) => {
             const Icon = link.icon
             return (

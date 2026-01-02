@@ -10,7 +10,6 @@ import {
   Calendar,
   DollarSign,
   Settings,
-  Sparkles,
   Play,
 } from 'lucide-react'
 
@@ -50,12 +49,16 @@ export function NavigationRail() {
 
   return (
     <nav className="nav-rail">
-      {/* Premium Logo */}
+      {/* Official Chakana Logo */}
       <Link
         to="/"
-        className="w-14 h-14 rounded-2xl bg-chakana-gold flex items-center justify-center mb-8 shadow-gold-glow hover:scale-105 transition-transform duration-300"
+        className="w-14 h-14 rounded-2xl overflow-hidden mb-8 shadow-sage-glow hover:scale-105 transition-transform duration-300 ring-2 ring-chakana-sage/20"
       >
-        <Sparkles className="w-7 h-7 text-chakana-navy" />
+        <img
+          src="/logo-chakana.jpg"
+          alt="Chakana La Experiencia"
+          className="w-full h-full object-cover"
+        />
       </Link>
 
       {/* Main Navigation */}
@@ -75,15 +78,15 @@ export function NavigationRail() {
 
               {/* New Badge */}
               {item.isNew && !active && (
-                <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-chakana-gold animate-pulse-gold" />
+                <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-chakana-sage animate-pulse-sage" />
               )}
 
               {/* Tooltip */}
-              <span className="absolute left-full ml-3 px-3 py-2 bg-chakana-navy text-white text-sm font-medium rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap z-50 shadow-navy-glow pointer-events-none translate-x-2 group-hover:translate-x-0">
+              <span className="absolute left-full ml-3 px-3 py-2 bg-chakana-dark text-white text-sm font-medium rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap z-50 shadow-dark-glow pointer-events-none translate-x-2 group-hover:translate-x-0">
                 {t(item.translationKey)}
                 {item.isNew && (
-                  <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-chakana-gold text-chakana-navy rounded-md font-bold">
-                    NUEVO
+                  <span className="ml-2 px-1.5 py-0.5 text-[10px] bg-chakana-sage text-white rounded-md font-bold uppercase">
+                    {t('common.new')}
                   </span>
                 )}
               </span>
@@ -111,7 +114,7 @@ export function NavigationRail() {
               <Icon className="w-5 h-5" />
 
               {/* Tooltip */}
-              <span className="absolute left-full ml-3 px-3 py-2 bg-chakana-navy text-white text-sm font-medium rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap z-50 shadow-navy-glow pointer-events-none translate-x-2 group-hover:translate-x-0">
+              <span className="absolute left-full ml-3 px-3 py-2 bg-chakana-dark text-white text-sm font-medium rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap z-50 shadow-dark-glow pointer-events-none translate-x-2 group-hover:translate-x-0">
                 {t(item.translationKey)}
               </span>
             </Link>
