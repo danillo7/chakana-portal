@@ -118,7 +118,7 @@ export function Dashboard() {
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 rounded-2xl overflow-hidden shadow-sage-glow">
                   <img
-                    src="/logo-chakana.jpg"
+                    src={`${import.meta.env.BASE_URL}logo-chakana.jpg`}
                     alt="Chakana"
                     className="w-full h-full object-cover"
                   />

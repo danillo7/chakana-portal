@@ -23,6 +23,14 @@ const categoryGradients: Record<string, string> = {
   financial: 'from-chakana-gold/20 to-amber-500/20',
 }
 
+// Helper to build full URL with base path
+const getDocumentUrl = (contentPath: string) => {
+  const base = import.meta.env.BASE_URL || '/'
+  // Remove leading slash from contentPath if base already has trailing slash
+  const path = contentPath.startsWith('/') ? contentPath.slice(1) : contentPath
+  return `${base}${path}`
+}
+
 export function DocumentsPage() {
   const { t, i18n } = useTranslation()
   const { documents } = useDataStore()
@@ -37,9 +45,9 @@ export function DocumentsPage() {
   }
 
   const handleDownload = (doc: Document) => {
-    // If document has a content path, trigger download
+    // If document has a content path, trigger download with correct base path
     if (doc.contentPath) {
-      window.open(doc.contentPath, '_blank')
+      window.open(getDocumentUrl(doc.contentPath), '_blank')
     }
   }
 
@@ -195,7 +203,7 @@ export function DocumentsPage() {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => window.open(selectedDoc.contentPath, '_blank')}
+                      onClick={() => window.open(getDocumentUrl(selectedDoc.contentPath), '_blank')}
                       className="gap-2"
                     >
                       <ExternalLink className="w-4 h-4" />

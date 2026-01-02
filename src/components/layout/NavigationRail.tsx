@@ -55,7 +55,7 @@ export function NavigationRail() {
         className="w-14 h-14 rounded-2xl overflow-hidden mb-8 shadow-sage-glow hover:scale-105 transition-transform duration-300 ring-2 ring-chakana-sage/20"
       >
         <img
-          src="/logo-chakana.jpg"
+          src={`${import.meta.env.BASE_URL}logo-chakana.jpg`}
           alt="Chakana La Experiencia"
           className="w-full h-full object-cover"
         />

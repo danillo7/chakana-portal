@@ -87,19 +87,19 @@ export function TestimonialsPage() {
   return (
     <div className="space-y-12 animate-fade-in">
       {/* Hero Section */}
-      <div className="relative overflow-hidden rounded-3xl bg-chakana-navy p-8 md:p-12">
-        <div className="absolute inset-0 bg-gradient-radial-gold opacity-30" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-chakana-gold/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+      <div className="relative overflow-hidden rounded-3xl bg-chakana-dark p-8 md:p-12">
+        <div className="absolute inset-0 bg-gradient-radial-sage opacity-30" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-chakana-sage/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
         <div className="relative z-10">
-          <Badge className="badge-gold mb-4">
+          <Badge className="badge-sage mb-4">
             <Star className="w-3 h-3 mr-1" />
             Testimonios Verificados
           </Badge>
 
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Voces de{' '}
-            <span className="text-gradient-gold">Transformación</span>
+            <span className="text-gradient-sage">Transformación</span>
           </h1>
 
           <p className="text-white/70 text-lg max-w-2xl">
@@ -216,8 +216,8 @@ export function TestimonialsPage() {
       </section>
 
       {/* Call to Action */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-chakana-gold/10 to-chakana-navy/10 p-8 md:p-12 border border-chakana-gold/20">
-        <div className="absolute top-0 left-0 w-64 h-64 bg-chakana-gold/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2" />
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-chakana-sage/10 to-chakana-dark/10 p-8 md:p-12 border border-chakana-sage/20">
+        <div className="absolute top-0 left-0 w-64 h-64 bg-chakana-sage/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2" />
 
         <div className="relative z-10 text-center max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
