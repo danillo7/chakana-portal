@@ -1,0 +1,170 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "all": "All",
+    "none": "None",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "testimonials": "Testimonials",
+    "documents": "Documents",
+    "projects": "Projects",
+    "actions": "Actions",
+    "stakeholders": "Team",
+    "timeline": "Timeline",
+    "financial": "Financial",
+    "settings": "Settings"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Chakana project overview",
+    "welcome": "Welcome back",
+    "quickStats": "Quick Stats",
+    "recentActivity": "Recent Activity",
+    "upcomingActions": "Urgent Actions",
+    "projectProgress": "Project Progress",
+    "metrics": {
+      "totalInvestment": "Total Investment",
+      "activeProjects": "Active Projects",
+      "pendingActions": "Pending Actions",
+      "teamMembers": "Team Members"
+    }
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "subtitle": "Transformation experiences",
+    "videoTestimonials": "Video Testimonials",
+    "socialLinks": "Connect with Chakana",
+    "cta": {
+      "title": "Your Transformation Awaits",
+      "description": "Join hundreds of people who have discovered a new way of living."
+    }
+  },
+  "documents": {
+    "title": "Documents",
+    "subtitle": "Meeting minutes, business plans and documentation",
+    "categories": {
+      "atas": "Meeting Minutes",
+      "businessPlans": "Business Plans",
+      "research": "Research",
+      "legal": "Legal",
+      "financial": "Financial"
+    },
+    "filters": {
+      "all": "All documents",
+      "recent": "Recent",
+      "byProject": "By project"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Chakana initiatives tracking",
+    "status": {
+      "planning": "Planning",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "onHold": "On Hold"
+    },
+    "chakanaExperience": {
+      "name": "Chakana La Experiencia",
+      "description": "Transformational retreats and trainings"
+    },
+    "casaChakana": {
+      "name": "Casa Chakana",
+      "description": "Personal and professional transformation center"
+    },
+    "fundacionCooper": {
+      "name": "Fundación Cooper",
+      "description": "Social and community initiatives"
+    }
+  },
+  "actions": {
+    "title": "Actions",
+    "subtitle": "Tasks and commitment tracking",
+    "status": {
+      "pending": "Pending",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "overdue": "Overdue"
+    },
+    "priority": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "fields": {
+      "task": "Task",
+      "owner": "Owner",
+      "deadline": "Deadline",
+      "status": "Status",
+      "priority": "Priority"
+    }
+  },
+  "stakeholders": {
+    "title": "Team",
+    "subtitle": "Project collaborators and stakeholders",
+    "roles": {
+      "founder": "Founder",
+      "ceo": "CEO",
+      "advisor": "Advisor",
+      "investor": "Investor",
+      "partner": "Partner"
+    }
+  },
+  "timeline": {
+    "title": "Timeline",
+    "subtitle": "Project roadmap and milestones",
+    "phases": {
+      "phase1": "Phase 1: Foundation",
+      "phase2": "Phase 2: Growth",
+      "phase3": "Phase 3: Expansion",
+      "phase4": "Phase 4: Consolidation",
+      "phase5": "Phase 5: Scaling"
+    }
+  },
+  "financial": {
+    "title": "Financial",
+    "subtitle": "Project financial overview",
+    "metrics": {
+      "investment": "Investment",
+      "revenue": "Revenue",
+      "profit": "Profit",
+      "margin": "Margin"
+    },
+    "projections": "Projections",
+    "breakdown": "Revenue Breakdown"
+  },
+  "auth": {
+    "login": "Sign In",
+    "logout": "Sign Out",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot your password?",
+    "signInWith": "Sign in with",
+    "welcomeBack": "Welcome back",
+    "enterCredentials": "Enter your credentials to access"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "themes": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    }
+  }
+}

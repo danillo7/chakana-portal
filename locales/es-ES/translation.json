@@ -1,0 +1,170 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "export": "Exportar",
+    "back": "Volver",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "all": "Todos",
+    "none": "Ninguno",
+    "yes": "Sí",
+    "no": "No"
+  },
+  "nav": {
+    "dashboard": "Panel de Control",
+    "testimonials": "Testimonios",
+    "documents": "Documentos",
+    "projects": "Proyectos",
+    "actions": "Acciones",
+    "stakeholders": "Equipo",
+    "timeline": "Cronograma",
+    "financial": "Finanzas",
+    "settings": "Configuración"
+  },
+  "dashboard": {
+    "title": "Panel de Control",
+    "subtitle": "Vista general del proyecto Chakana",
+    "welcome": "Bienvenido de nuevo",
+    "quickStats": "Estadísticas Rápidas",
+    "recentActivity": "Actividad Reciente",
+    "upcomingActions": "Acciones Urgentes",
+    "projectProgress": "Progreso de Proyectos",
+    "metrics": {
+      "totalInvestment": "Inversión Total",
+      "activeProjects": "Proyectos Activos",
+      "pendingActions": "Acciones Pendientes",
+      "teamMembers": "Miembros del Equipo"
+    }
+  },
+  "testimonials": {
+    "title": "Testimonios",
+    "subtitle": "Experiencias de transformación",
+    "videoTestimonials": "Testimonios en Video",
+    "socialLinks": "Conecta con Chakana",
+    "cta": {
+      "title": "Tu Transformación te Espera",
+      "description": "Únete a cientos de personas que han descubierto una nueva forma de vivir."
+    }
+  },
+  "documents": {
+    "title": "Documentos",
+    "subtitle": "Actas, planes de negocio y documentación",
+    "categories": {
+      "atas": "Actas de Reuniones",
+      "businessPlans": "Planes de Negocio",
+      "research": "Investigación",
+      "legal": "Legal",
+      "financial": "Financiero"
+    },
+    "filters": {
+      "all": "Todos los documentos",
+      "recent": "Documentos recientes",
+      "byProject": "Por proyecto"
+    }
+  },
+  "projects": {
+    "title": "Proyectos",
+    "subtitle": "Seguimiento de iniciativas Chakana",
+    "status": {
+      "planning": "En planificación",
+      "inProgress": "En progreso",
+      "completed": "Completado",
+      "onHold": "En pausa"
+    },
+    "chakanaExperience": {
+      "name": "Chakana La Experiencia",
+      "description": "Retiros transformacionales y formaciones"
+    },
+    "casaChakana": {
+      "name": "Casa Chakana",
+      "description": "Centro de transformación personal y profesional"
+    },
+    "fundacionCooper": {
+      "name": "Fundación Cooper",
+      "description": "Iniciativas sociales y comunitarias"
+    }
+  },
+  "actions": {
+    "title": "Acciones",
+    "subtitle": "Tareas y seguimiento de compromisos",
+    "status": {
+      "pending": "Pendiente",
+      "inProgress": "En progreso",
+      "completed": "Completada",
+      "overdue": "Atrasada"
+    },
+    "priority": {
+      "high": "Alta",
+      "medium": "Media",
+      "low": "Baja"
+    },
+    "fields": {
+      "task": "Tarea",
+      "owner": "Responsable",
+      "deadline": "Fecha límite",
+      "status": "Estado",
+      "priority": "Prioridad"
+    }
+  },
+  "stakeholders": {
+    "title": "Equipo",
+    "subtitle": "Colaboradores y stakeholders del proyecto",
+    "roles": {
+      "founder": "Fundador",
+      "ceo": "CEO",
+      "advisor": "Asesor",
+      "investor": "Inversor",
+      "partner": "Socio"
+    }
+  },
+  "timeline": {
+    "title": "Cronograma",
+    "subtitle": "Roadmap y milestones del proyecto",
+    "phases": {
+      "phase1": "Fase 1: Fundación",
+      "phase2": "Fase 2: Crecimiento",
+      "phase3": "Fase 3: Expansión",
+      "phase4": "Fase 4: Consolidación",
+      "phase5": "Fase 5: Escalamiento"
+    }
+  },
+  "financial": {
+    "title": "Finanzas",
+    "subtitle": "Overview financiero del proyecto",
+    "metrics": {
+      "investment": "Inversión",
+      "revenue": "Ingresos",
+      "profit": "Beneficio",
+      "margin": "Margen"
+    },
+    "projections": "Proyecciones",
+    "breakdown": "Desglose de Ingresos"
+  },
+  "auth": {
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar Sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "signInWith": "Iniciar sesión con",
+    "welcomeBack": "Bienvenido de nuevo",
+    "enterCredentials": "Introduce tus credenciales para acceder"
+  },
+  "settings": {
+    "title": "Configuración",
+    "language": "Idioma",
+    "theme": "Tema",
+    "themes": {
+      "light": "Claro",
+      "dark": "Oscuro",
+      "system": "Sistema"
+    }
+  }
+}
