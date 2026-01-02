@@ -74,7 +74,10 @@
       "byProject": "Por projeto"
     },
     "project": "Projeto associado",
-    "noContent": "Sem conteúdo adicional disponível"
+    "noContent": "Sem conteúdo adicional disponível",
+    "loading": "Carregando documento...",
+    "errorLoading": "Erro ao carregar o documento",
+    "openExternal": "Abrir em nova aba"
   },
   "projects": {
     "title": "Projetos",
