@@ -31,7 +31,15 @@
     "stakeholders": "Equipo",
     "timeline": "Cronograma",
     "financial": "Finanzas",
-    "settings": "Configuración"
+    "settings": "Configuración",
+    "strategy": "Estrategia",
+    "businessPlan": "Plan de Negocio",
+    "swot": "Análisis SWOT",
+    "intelligence": "Inteligencia",
+    "market": "Mercado",
+    "news": "Noticias",
+    "operations": "Operaciones",
+    "people": "Personas"
   },
   "dashboard": {
     "title": "Panel de Control",

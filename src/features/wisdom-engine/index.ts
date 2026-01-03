@@ -44,6 +44,7 @@ export { useWisdomStore } from './stores/wisdomStore'
 // ============================================================================
 
 export { wisdomEngine } from './services/WisdomEngine'
+export { exportReflectionsToPDF, exportSingleReflectionToPDF } from './services/PDFExporter'
 
 // ============================================================================
 // TYPES

@@ -7,8 +7,9 @@
 
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Trash2, Edit3, Save, X, BookmarkCheck, Filter } from 'lucide-react'
+import { Trash2, Edit3, Save, X, BookmarkCheck, Filter, Download } from 'lucide-react'
 import { useWisdomStore } from '../stores/wisdomStore'
+import { exportReflectionsToPDF } from '../services/PDFExporter'
 import type { SavedReflection } from '../types/wisdom-engine'
 
 /**
@@ -67,6 +68,11 @@ export function SavedReflections() {
   const handleEditCancel = () => {
     setEditingId(null)
     setEditNote('')
+  }
+
+  // Handle PDF export
+  const handleExportPDF = () => {
+    exportReflectionsToPDF(savedReflections, 'es-ES')
   }
 
   // Format date
@@ -271,13 +277,15 @@ export function SavedReflections() {
         </AnimatePresence>
       </div>
 
-      {/* Export Button (Phase 5 - future) */}
+      {/* Export Button */}
       <div className="mt-8 flex justify-center">
         <button
-          disabled
-          className="px-6 py-3 rounded-xl bg-white/5 text-white/40 text-sm font-medium cursor-not-allowed"
+          onClick={handleExportPDF}
+          className="px-6 py-3 rounded-xl bg-gradient-to-r from-chakana-sage to-chakana-mint text-white font-semibold hover:shadow-sage-glow transition-all flex items-center gap-2"
         >
-          📄 Exportar a PDF (Próximamente)
+          <Download className="w-4 h-4" />
+          Exportar a PDF ({filteredReflections.length}{' '}
+          {filteredReflections.length === 1 ? 'reflexión' : 'reflexiones'})
         </button>
       </div>
     </div>
