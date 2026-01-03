@@ -144,7 +144,7 @@ export function MultiCityWidget() {
     if (selectedCities.length === 0) {
       // Small delay to ensure store is ready
       setTimeout(() => {
-        // 1. Add IP-detected city (if available)
+        // 1. Add IP-detected city first (priority)
         if (detectedTimezone) {
           const matchingCity = LOCATIONS.find(
             (loc) => loc.timezone === detectedTimezone.timezone
@@ -154,23 +154,13 @@ export function MultiCityWidget() {
           }
         }
 
-        // 2. Add Madrid (if not already added)
-        const madrid = LOCATIONS.find((loc) => loc.id === 'madrid')
-        if (madrid && !selectedCities.includes('madrid')) {
-          // Only add if not same as detected city
-          if (!detectedTimezone || detectedTimezone.timezone !== madrid.timezone) {
-            addCity('madrid')
-          }
-        }
+        // 2. Always try to add Madrid
+        // addCity() will skip if already added or if limit reached
+        addCity('madrid')
 
-        // 3. Add New York (if not already added)
-        const newYork = LOCATIONS.find((loc) => loc.id === 'new-york')
-        if (newYork && !selectedCities.includes('new-york')) {
-          // Only add if not same as detected city or Madrid
-          if (!detectedTimezone || detectedTimezone.timezone !== newYork.timezone) {
-            addCity('new-york')
-          }
-        }
+        // 3. Always try to add New York
+        // addCity() will skip if already added or if limit reached
+        addCity('new-york')
       }, 100)
     }
   }, []) // Run only once on mount
