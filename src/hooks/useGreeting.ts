@@ -101,13 +101,13 @@ export function useGreeting(language: string = 'es-ES', location?: LocationOptio
         'es-ES': {
           morning: 'Buenos días',
           afternoon: 'Buenas tardes',
-          evening: 'Buenas tardes',
+          evening: 'Buenas noches',  // FIX: 19h-22h deve ser "Buenas noches"
           night: 'Buenas noches'
         },
         'pt-BR': {
           morning: 'Bom dia',
           afternoon: 'Boa tarde',
-          evening: 'Boa tarde',
+          evening: 'Boa noite',  // FIX: 19h-22h deve ser "Boa noite"
           night: 'Boa noite'
         },
         'en': {

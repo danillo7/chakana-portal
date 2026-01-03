@@ -4,9 +4,12 @@ import { useTranslation } from 'react-i18next'
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'
 import { useDataStore } from '../stores/dataStore'
-import { useUIStore, LOCATIONS } from '../stores/uiStore'
+import { useUIStore, LOCATIONS, type LocationOption } from '../stores/uiStore'
 import { formatCurrency, formatDateShort } from '../lib/utils'
 import { useGreeting, useWeather } from '../hooks/useGreeting'
+import { useTimezone } from '../hooks/useTimezone'
+import { ContextualHeader } from '../features/wisdom-engine'
+import { MultiCityWidget } from '../components/MultiCityWidget'
 import {
   DollarSign,
   FolderKanban,
@@ -75,8 +78,27 @@ export function Dashboard() {
   const { projects, actions, stakeholders, documents } = useDataStore()
   const { selectedLocationId, setSelectedLocation, getSelectedLocation } = useUIStore()
   const selectedLocation = getSelectedLocation()
-  const { greeting, emoji, timeString, dateString, dayOfWeek } = useGreeting(i18n.language, selectedLocation)
-  const weather = useWeather(selectedLocation)
+
+  // Use IP-detected timezone for accurate greeting based on user's real location
+  const { timezoneInfo } = useTimezone()
+
+  // Create effective location for greeting: prioritize IP-detected timezone
+  const effectiveLocation: LocationOption = timezoneInfo
+    ? {
+        id: 'detected',
+        city: timezoneInfo.city,
+        country: timezoneInfo.country,
+        timezone: timezoneInfo.timezone,
+        flag: timezoneInfo.flag,
+        coords: `${timezoneInfo.city},${timezoneInfo.country}`
+      }
+    : selectedLocation
+
+  // Use IP-detected timezone for greeting (accurate "Bom dia/Boa tarde/Boa noite")
+  const { greeting, emoji, timeString, dateString, dayOfWeek } = useGreeting(i18n.language, effectiveLocation)
+
+  // Weather MUST use the same location as greeting (effectiveLocation) - FIX for mismatched data
+  const weather = useWeather(effectiveLocation)
 
   // Location selector state
   const [locationOpen, setLocationOpen] = useState(false)
@@ -206,6 +228,11 @@ export function Dashboard() {
                   <p className="text-lg text-white/50 max-w-lg mt-2">
                     {t('dashboard.subtitle')}
                   </p>
+
+                  {/* Wisdom Engine - Contextual Reflection Quotes */}
+                  <div className="mt-6 max-w-2xl">
+                    <ContextualHeader />
+                  </div>
                 </div>
               </div>
 
@@ -280,11 +307,23 @@ export function Dashboard() {
                 <div className="flex-1 flex flex-col items-center justify-center">
                   <div className="flex items-center gap-1">
                     <Clock className="w-5 h-5 text-chakana-mint mb-1" />
+                    {timezoneInfo?.detectedFrom === 'ip' && (
+                      <span className="text-[10px] text-chakana-sage/60 ml-1">auto</span>
+                    )}
                   </div>
                   <span className="text-5xl md:text-6xl font-display font-bold text-white tracking-tight">
                     {timeString}
                   </span>
-                  <span className="text-sm text-white/40 mt-2">{selectedLocation.timezone.split('/')[1]?.replace('_', ' ') || selectedLocation.timezone}</span>
+                  <span className="text-sm text-white/40 mt-2">
+                    {timezoneInfo ? (
+                      <>
+                        {timezoneInfo.flag} {timezoneInfo.city}
+                        {timezoneInfo.offset && <span className="text-white/30 ml-1">({timezoneInfo.offset})</span>}
+                      </>
+                    ) : (
+                      selectedLocation.timezone.split('/')[1]?.replace('_', ' ') || selectedLocation.timezone
+                    )}
+                  </span>
                 </div>
               </div>
             </div>
@@ -410,6 +449,9 @@ export function Dashboard() {
           </p>
         </div>
       </div>
+
+      {/* Multi-City World Clock Widget */}
+      <MultiCityWidget />
 
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
