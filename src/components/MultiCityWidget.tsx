@@ -142,7 +142,7 @@ export function MultiCityWidget() {
 
     // Only auto-add if no cities selected yet
     if (selectedCities.length === 0) {
-      // Small delay to ensure store is ready
+      // Delay to ensure Zustand persist is fully hydrated
       setTimeout(() => {
         // 1. Add IP-detected city first (priority)
         if (detectedTimezone) {
@@ -165,7 +165,7 @@ export function MultiCityWidget() {
         // 4. Fallback: Add São Paulo to ensure 3 cities
         // This handles cases where IP-detected city is Madrid or New York (duplicates)
         addCity('sao-paulo')
-      }, 100)
+      }, 500)
     }
   }, []) // Run only once on mount
 
