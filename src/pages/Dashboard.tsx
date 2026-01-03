@@ -8,7 +8,13 @@ import { useUIStore, LOCATIONS, type LocationOption } from '../stores/uiStore'
 import { formatCurrency, formatDateShort } from '../lib/utils'
 import { useGreeting, useWeather } from '../hooks/useGreeting'
 import { useTimezone } from '../hooks/useTimezone'
-import { ContextualHeader } from '../features/wisdom-engine'
+import {
+  ContextualHeader,
+  WelcomeModal,
+  MicroPause,
+  useWelcomeModalTriggers,
+  useActivityTimer,
+} from '../features/wisdom-engine'
 import { MultiCityWidget } from '../components/MultiCityWidget'
 import {
   DollarSign,
@@ -114,6 +120,12 @@ export function Dashboard() {
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
+
+  // Wisdom Engine - Welcome Modal triggers (auto-detects when to show)
+  useWelcomeModalTriggers()
+
+  // Wisdom Engine - Activity timer for micro-pauses
+  useActivityTimer()
 
   // Calculate metrics
   const totalInvestment = projects.reduce((sum, p) => sum + (p.budget || 0), 0)
@@ -699,6 +711,15 @@ export function Dashboard() {
           </div>
         </CardContent>
       </Card>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          🧠 WISDOM ENGINE COMPONENTS
+      ═══════════════════════════════════════════════════════════════════════ */}
+      {/* Welcome Modal - Shows on first visit or after inactivity */}
+      <WelcomeModal />
+
+      {/* Micro-Pause - Appears after 20+ minutes of activity */}
+      <MicroPause />
     </div>
   )
 }

@@ -1,0 +1,823 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-02",
+  "totalQuotes": 90,
+  "categories": {
+    "transformacion": 45,
+    "chakana": 22,
+    "presencia": 13,
+    "cta": 10
+  },
+  "quotes": [
+    {
+      "id": "tr-auto-001",
+      "text": "La transformación comienza cuando dejas de ser quien crees que debes ser y empiezas a ser quien realmente eres.",
+      "category": "transformacion",
+      "subcategory": "autoconocimiento",
+      "weight": 2,
+      "tags": ["identidad", "autenticidad", "cambio"],
+      "language": "es"
+    },
+    {
+      "id": "tr-auto-002",
+      "text": "¿Qué versión de ti mismo estás construyendo hoy?",
+      "category": "transformacion",
+      "subcategory": "autoconocimiento",
+      "weight": 2,
+      "tags": ["reflexion", "eleccion", "presente"],
+      "language": "es"
+    },
+    {
+      "id": "tr-auto-003",
+      "text": "El cambio que buscas fuera ya existe dentro de ti.",
+      "category": "transformacion",
+      "subcategory": "autoconocimiento",
+      "weight": 2,
+      "tags": ["interior", "potencial", "búsqueda"],
+      "language": "es"
+    },
+    {
+      "id": "tr-auto-004",
+      "text": "No estás roto. Estás en transformación.",
+      "category": "transformacion",
+      "subcategory": "autoconocimiento",
+      "weight": 3,
+      "tags": ["aceptacion", "proceso", "sanacion"],
+      "language": "es"
+    },
+    {
+      "id": "tr-auto-005",
+      "text": "La persona que serás mañana está siendo creada por las decisiones de hoy.",
+      "category": "transformacion",
+      "subcategory": "autoconocimiento",
+      "weight": 2,
+      "tags": ["decisiones", "futuro", "responsabilidad"],
+      "language": "es"
+    },
+    {
+      "id": "tr-auto-006",
+      "text": "Conocerse a uno mismo es el inicio de toda transformación profunda.",
+      "category": "transformacion",
+      "subcategory": "autoconocimiento",
+      "weight": 1,
+      "tags": ["autoconocimiento", "inicio", "profundidad"],
+      "language": "es"
+    },
+    {
+      "id": "tr-auto-007",
+      "text": "Tu verdadero yo no necesita validación externa. Necesita permiso interno.",
+      "category": "transformacion",
+      "subcategory": "autoconocimiento",
+      "weight": 2,
+      "tags": ["autenticidad", "validacion", "permiso"],
+      "language": "es"
+    },
+    {
+      "id": "tr-auto-008",
+      "text": "¿Estás viviendo tu vida o la vida que otros diseñaron para ti?",
+      "category": "transformacion",
+      "subcategory": "autoconocimiento",
+      "weight": 2,
+      "tags": ["reflexion", "autonomia", "eleccion"],
+      "language": "es"
+    },
+    {
+      "id": "tr-auto-009",
+      "text": "La autenticidad es el acto más revolucionario en un mundo de máscaras.",
+      "category": "transformacion",
+      "subcategory": "autoconocimiento",
+      "weight": 2,
+      "tags": ["autenticidad", "revolucion", "coraje"],
+      "language": "es"
+    },
+    {
+      "id": "tr-auto-010",
+      "text": "Cuando te aceptas completamente, el mundo cambia contigo.",
+      "category": "transformacion",
+      "subcategory": "autoconocimiento",
+      "weight": 1,
+      "tags": ["aceptacion", "cambio", "mundo"],
+      "language": "es"
+    },
+    {
+      "id": "tr-auto-011",
+      "text": "Tu historia no define tu destino. Tus decisiones de hoy sí.",
+      "category": "transformacion",
+      "subcategory": "autoconocimiento",
+      "weight": 2,
+      "tags": ["historia", "destino", "decisiones"],
+      "language": "es"
+    },
+    {
+      "id": "tr-auto-012",
+      "text": "El coraje no es ausencia de miedo. Es actuar a pesar de él.",
+      "category": "transformacion",
+      "subcategory": "autoconocimiento",
+      "weight": 1,
+      "tags": ["coraje", "miedo", "accion"],
+      "language": "es"
+    },
+    {
+      "id": "tr-auto-013",
+      "text": "Cada versión tuya que sueltas hace espacio para quien estás destinado a ser.",
+      "category": "transformacion",
+      "subcategory": "autoconocimiento",
+      "weight": 2,
+      "tags": ["soltar", "evolucion", "destino"],
+      "language": "es"
+    },
+    {
+      "id": "tr-auto-014",
+      "text": "Tu potencial no tiene límites. Solo creencias limitantes.",
+      "category": "transformacion",
+      "subcategory": "autoconocimiento",
+      "weight": 2,
+      "tags": ["potencial", "creencias", "limites"],
+      "language": "es"
+    },
+    {
+      "id": "tr-auto-015",
+      "text": "La pregunta no es '¿quién soy?' sino '¿quién elijo ser?'",
+      "category": "transformacion",
+      "subcategory": "autoconocimiento",
+      "weight": 2,
+      "tags": ["identidad", "eleccion", "poder"],
+      "language": "es"
+    },
+    {
+      "id": "tr-proc-001",
+      "text": "Soltar no es rendirse. Es liberar espacio para lo que realmente importa.",
+      "category": "transformacion",
+      "subcategory": "proceso",
+      "weight": 2,
+      "tags": ["soltar", "liberacion", "prioridades"],
+      "language": "es"
+    },
+    {
+      "id": "tr-proc-002",
+      "text": "Tu zona de confort es también tu zona de estancamiento.",
+      "category": "transformacion",
+      "subcategory": "proceso",
+      "weight": 2,
+      "tags": ["confort", "crecimiento", "riesgo"],
+      "language": "es"
+    },
+    {
+      "id": "tr-proc-003",
+      "text": "La magia ocurre cuando te atreves a ser vulnerable.",
+      "category": "transformacion",
+      "subcategory": "proceso",
+      "weight": 2,
+      "tags": ["vulnerabilidad", "magia", "coraje"],
+      "language": "es"
+    },
+    {
+      "id": "tr-proc-004",
+      "text": "No necesitas ser perfecto. Necesitas ser auténtico.",
+      "category": "transformacion",
+      "subcategory": "proceso",
+      "weight": 2,
+      "tags": ["perfeccion", "autenticidad", "aceptacion"],
+      "language": "es"
+    },
+    {
+      "id": "tr-proc-005",
+      "text": "Cada final es el comienzo de algo más grande.",
+      "category": "transformacion",
+      "subcategory": "proceso",
+      "weight": 1,
+      "tags": ["finales", "comienzos", "ciclos"],
+      "language": "es"
+    },
+    {
+      "id": "tr-proc-006",
+      "text": "La libertad está al otro lado del miedo.",
+      "category": "transformacion",
+      "subcategory": "proceso",
+      "weight": 2,
+      "tags": ["libertad", "miedo", "superacion"],
+      "language": "es"
+    },
+    {
+      "id": "tr-proc-007",
+      "text": "Transforma tus heridas en sabiduría.",
+      "category": "transformacion",
+      "subcategory": "proceso",
+      "weight": 2,
+      "tags": ["heridas", "sabiduria", "transformacion"],
+      "language": "es"
+    },
+    {
+      "id": "tr-proc-008",
+      "text": "El primer paso es siempre el más difícil. Y el más importante.",
+      "category": "transformacion",
+      "subcategory": "proceso",
+      "weight": 1,
+      "tags": ["inicio", "coraje", "accion"],
+      "language": "es"
+    },
+    {
+      "id": "tr-proc-009",
+      "text": "No esperes el momento perfecto. Créalo.",
+      "category": "transformacion",
+      "subcategory": "proceso",
+      "weight": 2,
+      "tags": ["timing", "accion", "creacion"],
+      "language": "es"
+    },
+    {
+      "id": "tr-proc-010",
+      "text": "La vida que imaginas comienza cuando dejas de vivir la que otros esperan de ti.",
+      "category": "transformacion",
+      "subcategory": "proceso",
+      "weight": 2,
+      "tags": ["vida", "expectativas", "libertad"],
+      "language": "es"
+    },
+    {
+      "id": "tr-proc-011",
+      "text": "El caos es a menudo el preludio del renacimiento.",
+      "category": "transformacion",
+      "subcategory": "proceso",
+      "weight": 1,
+      "tags": ["caos", "renacimiento", "proceso"],
+      "language": "es"
+    },
+    {
+      "id": "tr-proc-012",
+      "text": "Las crisis no vienen a destruirte. Vienen a reconstruirte más fuerte.",
+      "category": "transformacion",
+      "subcategory": "proceso",
+      "weight": 2,
+      "tags": ["crisis", "fortaleza", "reconstruccion"],
+      "language": "es"
+    },
+    {
+      "id": "tr-proc-013",
+      "text": "Resistirse al cambio es como resistirse al amanecer: inevitable y agotador.",
+      "category": "transformacion",
+      "subcategory": "proceso",
+      "weight": 1,
+      "tags": ["resistencia", "cambio", "inevitabilidad"],
+      "language": "es"
+    },
+    {
+      "id": "tr-proc-014",
+      "text": "La incomodidad del crecimiento es temporal. El arrepentimiento de no intentarlo es eterno.",
+      "category": "transformacion",
+      "subcategory": "proceso",
+      "weight": 2,
+      "tags": ["crecimiento", "incomodidad", "arrepentimiento"],
+      "language": "es"
+    },
+    {
+      "id": "tr-proc-015",
+      "text": "Cada día sin acción es un día más lejos de tu mejor versión.",
+      "category": "transformacion",
+      "subcategory": "proceso",
+      "weight": 1,
+      "tags": ["accion", "version", "tiempo"],
+      "language": "es"
+    },
+    {
+      "id": "tr-prop-001",
+      "text": "No encuentras tu propósito. Lo construyes con cada elección consciente.",
+      "category": "transformacion",
+      "subcategory": "proposito",
+      "weight": 2,
+      "tags": ["proposito", "eleccion", "construccion"],
+      "language": "es"
+    },
+    {
+      "id": "tr-prop-002",
+      "text": "La vida tiene sentido cuando dejas de buscar y empiezas a crear.",
+      "category": "transformacion",
+      "subcategory": "proposito",
+      "weight": 2,
+      "tags": ["sentido", "creacion", "busqueda"],
+      "language": "es"
+    },
+    {
+      "id": "tr-prop-003",
+      "text": "Tu legado no es lo que acumulas. Es lo que transformas en otros.",
+      "category": "transformacion",
+      "subcategory": "proposito",
+      "weight": 2,
+      "tags": ["legado", "impacto", "transformacion"],
+      "language": "es"
+    },
+    {
+      "id": "tr-prop-004",
+      "text": "El éxito sin significado es el fracaso más sofisticado.",
+      "category": "transformacion",
+      "subcategory": "proposito",
+      "weight": 2,
+      "tags": ["exito", "significado", "valores"],
+      "language": "es"
+    },
+    {
+      "id": "tr-prop-005",
+      "text": "¿Estás ocupado o estás vivo?",
+      "category": "transformacion",
+      "subcategory": "proposito",
+      "weight": 2,
+      "tags": ["reflexion", "vida", "presencia"],
+      "language": "es"
+    },
+    {
+      "id": "tr-prop-006",
+      "text": "La pregunta más importante no es '¿qué quiero?' sino '¿para qué estoy aquí?'",
+      "category": "transformacion",
+      "subcategory": "proposito",
+      "weight": 2,
+      "tags": ["proposito", "existencia", "mision"],
+      "language": "es"
+    },
+    {
+      "id": "tr-prop-007",
+      "text": "Tu talento es lo que haces bien. Tu propósito es por qué lo haces.",
+      "category": "transformacion",
+      "subcategory": "proposito",
+      "weight": 1,
+      "tags": ["talento", "proposito", "motivacion"],
+      "language": "es"
+    },
+    {
+      "id": "tr-prop-008",
+      "text": "El dinero compra comodidad. El propósito compra realización.",
+      "category": "transformacion",
+      "subcategory": "proposito",
+      "weight": 1,
+      "tags": ["dinero", "proposito", "realizacion"],
+      "language": "es"
+    },
+    {
+      "id": "tr-prop-009",
+      "text": "Cuando vives alineado con tu esencia, el esfuerzo se vuelve gozo.",
+      "category": "transformacion",
+      "subcategory": "proposito",
+      "weight": 2,
+      "tags": ["alineacion", "esencia", "gozo"],
+      "language": "es"
+    },
+    {
+      "id": "tr-prop-010",
+      "text": "No se trata de encontrar tiempo. Se trata de crear prioridades.",
+      "category": "transformacion",
+      "subcategory": "proposito",
+      "weight": 1,
+      "tags": ["tiempo", "prioridades", "eleccion"],
+      "language": "es"
+    },
+    {
+      "id": "tr-prop-011",
+      "text": "La abundancia verdadera es tener una vida que no necesitas escapar.",
+      "category": "transformacion",
+      "subcategory": "proposito",
+      "weight": 2,
+      "tags": ["abundancia", "vida", "paz"],
+      "language": "es"
+    },
+    {
+      "id": "tr-prop-012",
+      "text": "El impacto que dejas en otros es el único éxito que trasciende.",
+      "category": "transformacion",
+      "subcategory": "proposito",
+      "weight": 2,
+      "tags": ["impacto", "trascendencia", "legado"],
+      "language": "es"
+    },
+    {
+      "id": "tr-prop-013",
+      "text": "Una vida sin propósito es como un barco sin timón: a merced de las olas.",
+      "category": "transformacion",
+      "subcategory": "proposito",
+      "weight": 1,
+      "tags": ["proposito", "direccion", "control"],
+      "language": "es"
+    },
+    {
+      "id": "tr-prop-014",
+      "text": "Tu tiempo es finito. Tu impacto puede ser infinito.",
+      "category": "transformacion",
+      "subcategory": "proposito",
+      "weight": 2,
+      "tags": ["tiempo", "impacto", "legado"],
+      "language": "es"
+    },
+    {
+      "id": "tr-prop-015",
+      "text": "La diferencia entre existir y vivir está en la intención que pones en cada día.",
+      "category": "transformacion",
+      "subcategory": "proposito",
+      "weight": 2,
+      "tags": ["vivir", "intencion", "consciencia"],
+      "language": "es"
+    },
+    {
+      "id": "ch-fil-001",
+      "text": "La Chakana te recuerda: todo está conectado, todo tiene su tiempo.",
+      "category": "chakana",
+      "subcategory": "filosofia",
+      "weight": 3,
+      "tags": ["conexion", "tiempo", "sabiduria"],
+      "language": "es"
+    },
+    {
+      "id": "ch-fil-002",
+      "text": "Como los Andes que tocan el cielo: la altura que buscas está en tu interior.",
+      "category": "chakana",
+      "subcategory": "filosofia",
+      "weight": 3,
+      "tags": ["altura", "interior", "potencial"],
+      "language": "es"
+    },
+    {
+      "id": "ch-fil-003",
+      "text": "Los cuatro brazos de la Chakana: cielo, tierra, pasado, futuro. Tú eres el centro.",
+      "category": "chakana",
+      "subcategory": "filosofia",
+      "weight": 3,
+      "tags": ["equilibrio", "centro", "tiempo"],
+      "language": "es"
+    },
+    {
+      "id": "ch-fil-004",
+      "text": "Ayni: el equilibrio entre dar y recibir. ¿Qué estás compartiendo con el mundo?",
+      "category": "chakana",
+      "subcategory": "filosofia",
+      "weight": 2,
+      "tags": ["reciprocidad", "equilibrio", "compartir"],
+      "language": "es"
+    },
+    {
+      "id": "ch-fil-005",
+      "text": "El cóndor ve desde arriba. ¿Qué perspectiva necesitas cambiar?",
+      "category": "chakana",
+      "subcategory": "filosofia",
+      "weight": 2,
+      "tags": ["perspectiva", "vision", "altura"],
+      "language": "es"
+    },
+    {
+      "id": "ch-fil-006",
+      "text": "La Chakana es equilibrio. ¿Dónde está tu centro hoy?",
+      "category": "chakana",
+      "subcategory": "filosofia",
+      "weight": 2,
+      "tags": ["equilibrio", "centro", "presente"],
+      "language": "es"
+    },
+    {
+      "id": "ch-fil-007",
+      "text": "La cruz andina enseña: cada dirección tiene su sabiduría, pero el poder está en el centro.",
+      "category": "chakana",
+      "subcategory": "filosofia",
+      "weight": 2,
+      "tags": ["direcciones", "sabiduria", "poder"],
+      "language": "es"
+    },
+    {
+      "id": "ch-fil-008",
+      "text": "Hanan Pacha (cielo), Kay Pacha (tierra), Ukhu Pacha (interior): los tres mundos viven en ti.",
+      "category": "chakana",
+      "subcategory": "filosofia",
+      "weight": 2,
+      "tags": ["mundos", "totalidad", "integracion"],
+      "language": "es"
+    },
+    {
+      "id": "ch-fil-009",
+      "text": "La Chakana no apunta a un solo destino. Honra todos los caminos que te trajeron aquí.",
+      "category": "chakana",
+      "subcategory": "filosofia",
+      "weight": 1,
+      "tags": ["caminos", "honra", "historia"],
+      "language": "es"
+    },
+    {
+      "id": "ch-fil-010",
+      "text": "El equilibrio no es un destino. Es un ajuste constante, como caminar en las montañas.",
+      "category": "chakana",
+      "subcategory": "filosofia",
+      "weight": 2,
+      "tags": ["equilibrio", "proceso", "adaptacion"],
+      "language": "es"
+    },
+    {
+      "id": "ch-sab-001",
+      "text": "Los pueblos andinos sabían: la montaña más alta se escala un paso a la vez.",
+      "category": "chakana",
+      "subcategory": "sabiduria",
+      "weight": 2,
+      "tags": ["paciencia", "proceso", "pasos"],
+      "language": "es"
+    },
+    {
+      "id": "ch-sab-002",
+      "text": "Pachamama nos enseña: todo ciclo tiene su propósito.",
+      "category": "chakana",
+      "subcategory": "sabiduria",
+      "weight": 2,
+      "tags": ["ciclos", "naturaleza", "proposito"],
+      "language": "es"
+    },
+    {
+      "id": "ch-sab-003",
+      "text": "En los Andes aprenden: la tormenta pasa, la montaña permanece. Tú eres la montaña.",
+      "category": "chakana",
+      "subcategory": "sabiduria",
+      "weight": 2,
+      "tags": ["resiliencia", "permanencia", "fortaleza"],
+      "language": "es"
+    },
+    {
+      "id": "ch-sab-004",
+      "text": "La sabiduría andina: el que camina solo llega rápido. El que camina en comunidad llega lejos.",
+      "category": "chakana",
+      "subcategory": "sabiduria",
+      "weight": 2,
+      "tags": ["comunidad", "colaboracion", "camino"],
+      "language": "es"
+    },
+    {
+      "id": "ch-sab-005",
+      "text": "El río no lucha contra la roca. La rodea. Esa es la fuerza del agua: la flexibilidad.",
+      "category": "chakana",
+      "subcategory": "sabiduria",
+      "weight": 1,
+      "tags": ["flexibilidad", "adaptacion", "fuerza"],
+      "language": "es"
+    },
+    {
+      "id": "ch-sab-006",
+      "text": "Los antiguos sabían: honrar el pasado no es vivir en él. Es aprender de él.",
+      "category": "chakana",
+      "subcategory": "sabiduria",
+      "weight": 1,
+      "tags": ["pasado", "honra", "aprendizaje"],
+      "language": "es"
+    },
+    {
+      "id": "ch-sab-007",
+      "text": "Inti (sol) nos recuerda: cada amanecer es una nueva oportunidad de iluminar tu camino.",
+      "category": "chakana",
+      "subcategory": "sabiduria",
+      "weight": 2,
+      "tags": ["sol", "amanecer", "oportunidad"],
+      "language": "es"
+    },
+    {
+      "id": "ch-sab-008",
+      "text": "La coca sagrada enseña: lo que crece lento, crece fuerte.",
+      "category": "chakana",
+      "subcategory": "sabiduria",
+      "weight": 1,
+      "tags": ["crecimiento", "paciencia", "fortaleza"],
+      "language": "es"
+    },
+    {
+      "id": "ch-sab-009",
+      "text": "El tejido andino: cada hilo tiene su lugar, cada color su significado. Así es la vida.",
+      "category": "chakana",
+      "subcategory": "sabiduria",
+      "weight": 1,
+      "tags": ["tejido", "significado", "conexion"],
+      "language": "es"
+    },
+    {
+      "id": "ch-sab-010",
+      "text": "Los Apus (espíritus de montañas) guardan secretos: las cimas no se conquistan, se honran.",
+      "category": "chakana",
+      "subcategory": "sabiduria",
+      "weight": 1,
+      "tags": ["respeto", "cimas", "honra"],
+      "language": "es"
+    },
+    {
+      "id": "ch-sab-011",
+      "text": "Minka: el trabajo colectivo para el bien común. ¿Qué estás construyendo con otros?",
+      "category": "chakana",
+      "subcategory": "sabiduria",
+      "weight": 1,
+      "tags": ["colaboracion", "colectivo", "construccion"],
+      "language": "es"
+    },
+    {
+      "id": "ch-sab-012",
+      "text": "La huaca (lugar sagrado) más importante no está en las montañas. Está en tu corazón.",
+      "category": "chakana",
+      "subcategory": "sabiduria",
+      "weight": 2,
+      "tags": ["sagrado", "corazon", "interior"],
+      "language": "es"
+    },
+    {
+      "id": "pr-mind-001",
+      "text": "Respira. Este momento es todo lo que realmente tienes.",
+      "category": "presencia",
+      "subcategory": "mindfulness",
+      "weight": 3,
+      "tags": ["respiracion", "presente", "momento"],
+      "language": "es"
+    },
+    {
+      "id": "pr-mind-002",
+      "text": "La paz que buscas no está en el destino, está en el camino.",
+      "category": "presencia",
+      "subcategory": "mindfulness",
+      "weight": 2,
+      "tags": ["paz", "camino", "presente"],
+      "language": "es"
+    },
+    {
+      "id": "pr-mind-003",
+      "text": "Cada día es una nueva oportunidad de elegir quién quieres ser.",
+      "category": "presencia",
+      "subcategory": "mindfulness",
+      "weight": 2,
+      "tags": ["eleccion", "presente", "identidad"],
+      "language": "es"
+    },
+    {
+      "id": "pr-mind-004",
+      "text": "El silencio interior es donde nacen las mejores respuestas.",
+      "category": "presencia",
+      "subcategory": "mindfulness",
+      "weight": 2,
+      "tags": ["silencio", "interior", "respuestas"],
+      "language": "es"
+    },
+    {
+      "id": "pr-mind-005",
+      "text": "Estar presente es el regalo más grande que puedes darte.",
+      "category": "presencia",
+      "subcategory": "mindfulness",
+      "weight": 2,
+      "tags": ["presencia", "regalo", "autocuidado"],
+      "language": "es"
+    },
+    {
+      "id": "pr-mind-006",
+      "text": "El pasado ya no existe. El futuro aún no llega. Este instante es tu único poder.",
+      "category": "presencia",
+      "subcategory": "mindfulness",
+      "weight": 2,
+      "tags": ["presente", "poder", "tiempo"],
+      "language": "es"
+    },
+    {
+      "id": "pr-mind-007",
+      "text": "La ansiedad vive en el futuro. La depresión en el pasado. La paz en el ahora.",
+      "category": "presencia",
+      "subcategory": "mindfulness",
+      "weight": 2,
+      "tags": ["paz", "presente", "salud-mental"],
+      "language": "es"
+    },
+    {
+      "id": "pr-mind-008",
+      "text": "Cuando estás aquí, completamente, la vida se revela en su plenitud.",
+      "category": "presencia",
+      "subcategory": "mindfulness",
+      "weight": 1,
+      "tags": ["plenitud", "presencia", "vida"],
+      "language": "es"
+    },
+    {
+      "id": "pr-cons-001",
+      "text": "La conciencia es el primer paso del cambio. Observar sin juzgar es el segundo.",
+      "category": "presencia",
+      "subcategory": "consciencia",
+      "weight": 2,
+      "tags": ["consciencia", "observacion", "cambio"],
+      "language": "es"
+    },
+    {
+      "id": "pr-cons-002",
+      "text": "Lo que resistes, persiste. Lo que observas, se transforma.",
+      "category": "presencia",
+      "subcategory": "consciencia",
+      "weight": 2,
+      "tags": ["resistencia", "observacion", "transformacion"],
+      "language": "es"
+    },
+    {
+      "id": "pr-cons-003",
+      "text": "Tu mente crea historias. Tu consciencia las observa. ¿Quién eres tú?",
+      "category": "presencia",
+      "subcategory": "consciencia",
+      "weight": 2,
+      "tags": ["mente", "consciencia", "identidad"],
+      "language": "es"
+    },
+    {
+      "id": "pr-cons-004",
+      "text": "Entre el estímulo y la respuesta hay un espacio. En ese espacio está tu libertad.",
+      "category": "presencia",
+      "subcategory": "consciencia",
+      "weight": 2,
+      "tags": ["espacio", "libertad", "respuesta"],
+      "language": "es"
+    },
+    {
+      "id": "pr-cons-005",
+      "text": "Despertar no es alcanzar algo nuevo. Es soltar todo lo que no eres.",
+      "category": "presencia",
+      "subcategory": "consciencia",
+      "weight": 1,
+      "tags": ["despertar", "soltar", "esencia"],
+      "language": "es"
+    },
+    {
+      "id": "cta-001",
+      "text": "Tu próxima transformación te está esperando.",
+      "category": "cta",
+      "subcategory": "invitacion",
+      "weight": 1,
+      "tags": ["transformacion", "invitacion", "futuro"],
+      "language": "es"
+    },
+    {
+      "id": "cta-002",
+      "text": "¿Listo para el siguiente nivel de ti mismo?",
+      "category": "cta",
+      "subcategory": "invitacion",
+      "weight": 1,
+      "tags": ["nivel", "desafio", "crecimiento"],
+      "language": "es"
+    },
+    {
+      "id": "cta-003",
+      "text": "El retiro que necesitas no es de la vida. Es hacia tu verdadero yo.",
+      "category": "cta",
+      "subcategory": "invitacion",
+      "weight": 2,
+      "tags": ["retiro", "autenticidad", "interior"],
+      "language": "es"
+    },
+    {
+      "id": "cta-004",
+      "text": "Hay un lugar donde tu esencia se encuentra con tu propósito. ¿Listo para descubrirlo?",
+      "category": "cta",
+      "subcategory": "invitacion",
+      "weight": 1,
+      "tags": ["esencia", "proposito", "descubrimiento"],
+      "language": "es"
+    },
+    {
+      "id": "cta-005",
+      "text": "La experiencia que buscas no cambiará tu vida. Cambiará quién eres.",
+      "category": "cta",
+      "subcategory": "invitacion",
+      "weight": 2,
+      "tags": ["experiencia", "transformacion", "identidad"],
+      "language": "es"
+    },
+    {
+      "id": "cta-006",
+      "text": "Cada gran transformación comenzó con una decisión. Esta puede ser la tuya.",
+      "category": "cta",
+      "subcategory": "invitacion",
+      "weight": 1,
+      "tags": ["decision", "transformacion", "inicio"],
+      "language": "es"
+    },
+    {
+      "id": "cta-007",
+      "text": "No esperes a estar listo. Empieza y la preparación llegará en el camino.",
+      "category": "cta",
+      "subcategory": "invitacion",
+      "weight": 1,
+      "tags": ["accion", "preparacion", "inicio"],
+      "language": "es"
+    },
+    {
+      "id": "cta-008",
+      "text": "El primer paso es simple: di sí a ti mismo.",
+      "category": "cta",
+      "subcategory": "invitacion",
+      "weight": 2,
+      "tags": ["si", "autocuidado", "decision"],
+      "language": "es"
+    },
+    {
+      "id": "cta-009",
+      "text": "La mejor inversión que puedes hacer es en quien estás destinado a ser.",
+      "category": "cta",
+      "subcategory": "invitacion",
+      "weight": 1,
+      "tags": ["inversion", "potencial", "futuro"],
+      "language": "es"
+    },
+    {
+      "id": "cta-010",
+      "text": "Tu vida está esperando que te atrevas a vivirla plenamente. Hoy puede ser ese día.",
+      "category": "cta",
+      "subcategory": "invitacion",
+      "weight": 1,
+      "tags": ["vida", "plenitud", "presente"],
+      "language": "es"
+    }
+  ]
+}
