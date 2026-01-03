@@ -45,6 +45,13 @@ export { useWisdomStore } from './stores/wisdomStore'
 
 export { wisdomEngine } from './services/WisdomEngine'
 export { exportReflectionsToPDF, exportSingleReflectionToPDF } from './services/PDFExporter'
+export {
+  shareToWhatsApp,
+  shareNative,
+  generateInstagramCard,
+  downloadInstagramCard,
+  copyToClipboard,
+} from './services/SocialShare'
 
 // ============================================================================
 // TYPES
