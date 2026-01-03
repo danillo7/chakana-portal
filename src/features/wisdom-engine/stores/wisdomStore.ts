@@ -15,6 +15,8 @@ import type {
   SavedReflection,
 } from '../types/wisdom-engine'
 import { DEFAULT_WISDOM_PREFERENCES } from '../types/wisdom-engine'
+import { supabaseSync } from '../services/SupabaseSync'
+import type { SyncStatus, SyncResult } from '../services/SupabaseSync'
 
 interface WisdomStore {
   // ============================================================================
@@ -41,6 +43,12 @@ interface WisdomStore {
 
   /** Saved reflections */
   savedReflections: SavedReflection[]
+
+  /** Sync status */
+  syncStatus: SyncStatus
+
+  /** Last sync result */
+  lastSyncResult: SyncResult | null
 
   // ============================================================================
   // ACTIONS
@@ -78,6 +86,12 @@ interface WisdomStore {
 
   /** Get reflection by ID */
   getReflection: (id: string) => SavedReflection | undefined
+
+  /** Sync reflections with Supabase (manual sync) */
+  syncReflections: () => Promise<void>
+
+  /** Check if Supabase sync is available */
+  isSyncAvailable: () => boolean
 }
 
 /**
@@ -100,6 +114,8 @@ export const useWisdomStore = create<WisdomStore>()(
       sessionActiveMinutes: 0,
       sessionStart: null,
       savedReflections: [],
+      syncStatus: 'idle',
+      lastSyncResult: null,
 
       // Actions
       setCurrentQuote: (quote) =>
@@ -135,7 +151,7 @@ export const useWisdomStore = create<WisdomStore>()(
       clearRecentQuotes: () =>
         set({ recentQuotes: [] }),
 
-      saveReflection: (reflection) =>
+      saveReflection: (reflection) => {
         set((state) => ({
           savedReflections: [
             {
@@ -145,23 +161,72 @@ export const useWisdomStore = create<WisdomStore>()(
             },
             ...state.savedReflections,
           ],
-        })),
+        }))
 
-      deleteReflection: (id) =>
+        // Auto-sync to Supabase (non-blocking)
+        if (supabaseSync.isAvailable) {
+          supabaseSync.push(get().savedReflections).catch(console.error)
+        }
+      },
+
+      deleteReflection: async (id) => {
         set((state) => ({
           savedReflections: state.savedReflections.filter((r) => r.id !== id),
-        })),
+        }))
 
-      updateReflection: (id, updates) =>
+        // Delete from Supabase (non-blocking)
+        if (supabaseSync.isAvailable) {
+          supabaseSync.delete(id).catch(console.error)
+        }
+      },
+
+      updateReflection: (id, updates) => {
         set((state) => ({
           savedReflections: state.savedReflections.map((r) =>
             r.id === id ? { ...r, ...updates, updatedAt: new Date() } : r
           ),
-        })),
+        }))
+
+        // Auto-sync to Supabase (non-blocking)
+        if (supabaseSync.isAvailable) {
+          supabaseSync.push(get().savedReflections).catch(console.error)
+        }
+      },
 
       getReflection: (id: string): SavedReflection | undefined => {
         return get().savedReflections.find((r: SavedReflection) => r.id === id)
       },
+
+      syncReflections: async () => {
+        if (!supabaseSync.isAvailable) {
+          set({
+            lastSyncResult: {
+              success: false,
+              pushed: 0,
+              pulled: 0,
+              errors: ['Supabase not configured'],
+            },
+          })
+          return
+        }
+
+        set({ syncStatus: 'syncing' })
+
+        const { reflections, result } = await supabaseSync.sync(get().savedReflections)
+
+        set({
+          savedReflections: reflections,
+          syncStatus: result.success ? 'success' : 'error',
+          lastSyncResult: result,
+        })
+
+        // Reset status to idle after 3 seconds
+        setTimeout(() => {
+          set({ syncStatus: 'idle' })
+        }, 3000)
+      },
+
+      isSyncAvailable: () => supabaseSync.isAvailable,
     }),
     {
       name: 'chakana:wisdom-engine',

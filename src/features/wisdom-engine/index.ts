@@ -53,6 +53,8 @@ export {
   downloadInstagramCard,
   copyToClipboard,
 } from './services/SocialShare'
+export { supabaseSync } from './services/SupabaseSync'
+export type { SyncStatus, SyncResult } from './services/SupabaseSync'
 
 // ============================================================================
 // TYPES
