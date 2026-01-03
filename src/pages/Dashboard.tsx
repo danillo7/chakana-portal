@@ -1,12 +1,11 @@
-import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'
 import { useDataStore } from '../stores/dataStore'
-import { useUIStore, LOCATIONS, type LocationOption } from '../stores/uiStore'
+import { useUIStore, type LocationOption } from '../stores/uiStore'
 import { formatCurrency, formatDateShort } from '../lib/utils'
-import { useGreeting, useWeather } from '../hooks/useGreeting'
+import { useGreeting } from '../hooks/useGreeting'
 import { useTimezone } from '../hooks/useTimezone'
 import {
   ContextualHeader,
@@ -22,7 +21,6 @@ import {
   CheckSquare,
   Users,
   TrendingUp,
-  Clock,
   AlertCircle,
   Play,
   ArrowRight,
@@ -32,12 +30,7 @@ import {
   MessageCircle,
   ExternalLink,
   CalendarDays,
-  MapPin,
   FileText,
-  ChevronDown,
-  Thermometer,
-  Droplets,
-  Wind,
   Sparkles,
 } from 'lucide-react'
 
@@ -82,13 +75,12 @@ const nextRetreat = {
 export function Dashboard() {
   const { t, i18n } = useTranslation()
   const { projects, actions, stakeholders, documents } = useDataStore()
-  const { selectedLocationId, setSelectedLocation, getSelectedLocation } = useUIStore()
-  const selectedLocation = getSelectedLocation()
 
   // Use IP-detected timezone for accurate greeting based on user's real location
   const { timezoneInfo } = useTimezone()
 
   // Create effective location for greeting: prioritize IP-detected timezone
+  const selectedLocation = useUIStore(state => state.getSelectedLocation())
   const effectiveLocation: LocationOption = timezoneInfo
     ? {
         id: 'detected',
@@ -101,25 +93,7 @@ export function Dashboard() {
     : selectedLocation
 
   // Use IP-detected timezone for greeting (accurate "Bom dia/Boa tarde/Boa noite")
-  const { greeting, emoji, timeString, dateString, dayOfWeek } = useGreeting(i18n.language, effectiveLocation)
-
-  // Weather MUST use the same location as greeting (effectiveLocation) - FIX for mismatched data
-  const weather = useWeather(effectiveLocation)
-
-  // Location selector state
-  const [locationOpen, setLocationOpen] = useState(false)
-  const locationRef = useRef<HTMLDivElement>(null)
-
-  // Close dropdown on outside click
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (locationRef.current && !locationRef.current.contains(event.target as Node)) {
-        setLocationOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
+  const { greeting, emoji, dateString, dayOfWeek } = useGreeting(i18n.language, effectiveLocation)
 
   // Wisdom Engine - Welcome Modal triggers (auto-detects when to show)
   useWelcomeModalTriggers()
@@ -153,11 +127,11 @@ export function Dashboard() {
         {/* Ambient background glow */}
         <div className="absolute -inset-4 bg-gradient-to-r from-chakana-sage/10 via-chakana-mint/15 to-chakana-sage/10 rounded-[2rem] blur-2xl opacity-60" />
 
-        <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-4">
+        <div className="relative">
           {/* ─────────────────────────────────────────────────────────────────────
-              MAIN HERO CARD - Greeting & Branding (spans 8 cols)
+              MAIN HERO CARD - Greeting & Branding (full width)
           ───────────────────────────────────────────────────────────────────── */}
-          <div className="lg:col-span-8 relative overflow-hidden rounded-3xl bg-chakana-dark p-8 md:p-10">
+          <div className="relative overflow-hidden rounded-3xl bg-chakana-dark p-8 md:p-10">
             {/* Background Effects */}
             <div className="absolute inset-0 bg-gradient-radial-sage opacity-30" />
             <div className="absolute top-0 right-0 w-96 h-96 bg-chakana-sage/15 rounded-full blur-[100px] -translate-y-1/3 translate-x-1/3" />
@@ -262,133 +236,6 @@ export function Dashboard() {
                   <Users className="w-4 h-4 text-chakana-mint" />
                   <span className="text-sm">{teamMembers} miembros</span>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {/* ─────────────────────────────────────────────────────────────────────
-              RIGHT COLUMN - Time & Weather Cards (spans 4 cols)
-          ───────────────────────────────────────────────────────────────────── */}
-          <div className="lg:col-span-4 flex flex-col gap-4">
-            {/* TIME CARD - Premium Glass Design */}
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-chakana-dark via-chakana-dark-light to-chakana-dark p-6 flex-1">
-              {/* Glass effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
-              <div className="absolute top-0 right-0 w-32 h-32 bg-chakana-sage/20 rounded-full blur-3xl" />
-
-              <div className="relative z-10 flex flex-col h-full">
-                {/* Location Selector */}
-                <div className="relative mb-4" ref={locationRef}>
-                  <button
-                    onClick={() => setLocationOpen(!locationOpen)}
-                    className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all w-full group"
-                  >
-                    <MapPin className="w-4 h-4 text-chakana-sage" />
-                    <span className="text-sm font-medium text-white/80 flex-1 text-left">
-                      {selectedLocation.flag} {selectedLocation.city}, {selectedLocation.country}
-                    </span>
-                    <ChevronDown className={`w-4 h-4 text-white/50 transition-transform ${locationOpen ? 'rotate-180' : ''}`} />
-                  </button>
-
-                  {/* Location Dropdown */}
-                  {locationOpen && (
-                    <div className="absolute top-full left-0 right-0 mt-2 p-2 rounded-xl bg-chakana-dark/95 backdrop-blur-xl border border-white/10 shadow-2xl z-50 animate-fade-in">
-                      {LOCATIONS.map((loc) => (
-                        <button
-                          key={loc.id}
-                          onClick={() => {
-                            setSelectedLocation(loc.id)
-                            setLocationOpen(false)
-                          }}
-                          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ${
-                            selectedLocationId === loc.id
-                              ? 'bg-chakana-sage/20 text-white'
-                              : 'text-white/70 hover:bg-white/5 hover:text-white'
-                          }`}
-                        >
-                          <span className="text-lg">{loc.flag}</span>
-                          <span className="flex-1 text-sm font-medium">{loc.city}</span>
-                          <span className="text-xs text-white/40">{loc.country}</span>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* Large Time Display */}
-                <div className="flex-1 flex flex-col items-center justify-center">
-                  <div className="flex items-center gap-1">
-                    <Clock className="w-5 h-5 text-chakana-mint mb-1" />
-                    {timezoneInfo?.detectedFrom === 'ip' && (
-                      <span className="text-[10px] text-chakana-sage/60 ml-1">auto</span>
-                    )}
-                  </div>
-                  <span className="text-5xl md:text-6xl font-display font-bold text-white tracking-tight">
-                    {timeString}
-                  </span>
-                  <span className="text-sm text-white/40 mt-2">
-                    {timezoneInfo ? (
-                      <>
-                        {timezoneInfo.flag} {timezoneInfo.city}
-                        {timezoneInfo.offset && <span className="text-white/30 ml-1">({timezoneInfo.offset})</span>}
-                      </>
-                    ) : (
-                      selectedLocation.timezone.split('/')[1]?.replace('_', ' ') || selectedLocation.timezone
-                    )}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* WEATHER CARD - Premium Glass Design */}
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-chakana-dark via-chakana-dark-light to-chakana-dark p-6 flex-1">
-              {/* Glass effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-chakana-gold/15 rounded-full blur-3xl" />
-
-              <div className="relative z-10 flex flex-col h-full">
-                {weather ? (
-                  <>
-                    {/* Main Weather Display */}
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <span className="text-5xl">{weather.icon}</span>
-                      </div>
-                      <div className="text-right">
-                        <div className="flex items-start">
-                          <span className="text-5xl font-display font-bold text-white">{weather.temp}</span>
-                          <span className="text-2xl text-white/60 font-light">°C</span>
-                        </div>
-                        <p className="text-sm text-white/50 mt-1">{weather.description}</p>
-                      </div>
-                    </div>
-
-                    {/* Weather Details Grid */}
-                    <div className="grid grid-cols-3 gap-2 mt-auto pt-4 border-t border-white/10">
-                      <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/5">
-                        <Thermometer className="w-4 h-4 text-chakana-rose" />
-                        <span className="text-xs text-white/50">Sens.</span>
-                        <span className="text-sm font-semibold text-white">{weather.feelsLike}°</span>
-                      </div>
-                      <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/5">
-                        <Droplets className="w-4 h-4 text-blue-400" />
-                        <span className="text-xs text-white/50">Hum.</span>
-                        <span className="text-sm font-semibold text-white">{weather.humidity}%</span>
-                      </div>
-                      <div className="flex flex-col items-center gap-1 p-2 rounded-xl bg-white/5">
-                        <Wind className="w-4 h-4 text-chakana-mint" />
-                        <span className="text-xs text-white/50">Viento</span>
-                        <span className="text-sm font-semibold text-white">{weather.windSpeed}km/h</span>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  /* Weather Loading State */
-                  <div className="flex-1 flex flex-col items-center justify-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-white/10 animate-pulse" />
-                    <span className="text-sm text-white/40">Cargando clima...</span>
-                  </div>
-                )}
               </div>
             </div>
           </div>
