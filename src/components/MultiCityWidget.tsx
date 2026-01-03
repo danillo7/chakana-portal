@@ -16,9 +16,10 @@ import { Clock, Thermometer, Plus, X, Search, MapPin } from 'lucide-react'
 interface CityCardProps {
   location: LocationOption
   onRemove: () => void
+  isPrimary?: boolean // Primary city (IP-detected)
 }
 
-function CityCard({ location, onRemove }: CityCardProps) {
+function CityCard({ location, onRemove, isPrimary = false }: CityCardProps) {
   const [time, setTime] = useState('')
   const weather = useWeather(location)
 
@@ -52,10 +53,16 @@ function CityCard({ location, onRemove }: CityCardProps) {
   }
 
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-chakana-dark via-chakana-dark-light to-chakana-dark p-5 border border-white/10 hover:border-white/20 transition-all group">
+    <div className={`relative overflow-hidden rounded-2xl bg-gradient-to-br from-chakana-dark via-chakana-dark-light to-chakana-dark p-5 border transition-all group ${
+      isPrimary
+        ? 'border-chakana-sage/40 hover:border-chakana-sage/60 shadow-lg shadow-chakana-sage/10'
+        : 'border-white/10 hover:border-white/20'
+    }`}>
       {/* Glass effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
-      <div className="absolute top-0 right-0 w-24 h-24 bg-chakana-sage/15 rounded-full blur-2xl" />
+      <div className={`absolute top-0 right-0 w-24 h-24 rounded-full blur-2xl ${
+        isPrimary ? 'bg-chakana-sage/25' : 'bg-chakana-sage/15'
+      }`} />
 
       <div className="relative z-10">
         {/* Header - City Name */}
@@ -63,7 +70,14 @@ function CityCard({ location, onRemove }: CityCardProps) {
           <div className="flex items-center gap-2">
             <span className="text-2xl">{location.flag}</span>
             <div>
-              <h3 className="text-lg font-bold text-white">{location.city}</h3>
+              <div className="flex items-center gap-2">
+                <h3 className="text-lg font-bold text-white">{location.city}</h3>
+                {isPrimary && (
+                  <span className="px-2 py-0.5 rounded-full bg-chakana-sage/20 border border-chakana-sage/30 text-[10px] font-bold text-chakana-sage uppercase tracking-wider">
+                    Tu zona
+                  </span>
+                )}
+              </div>
               <p className="text-xs text-white/40">{location.country}</p>
             </div>
           </div>
@@ -122,26 +136,42 @@ export function MultiCityWidget() {
 
   const cities = getSelectedCities()
 
-  // Auto-add IP-detected city on first load
+  // Auto-add 3 default cities on first load
   useEffect(() => {
     const detectedTimezone = timezonePreferences.detectedTimezone
 
-    // Only auto-add if:
-    // 1. No cities selected yet
-    // 2. We have a detected timezone
-    // 3. Haven't added it before (check localStorage)
-    if (selectedCities.length === 0 && detectedTimezone) {
-      // Find matching city in LOCATIONS by timezone
-      const matchingCity = LOCATIONS.find(
-        (loc) => loc.timezone === detectedTimezone.timezone
-      )
+    // Only auto-add if no cities selected yet
+    if (selectedCities.length === 0) {
+      // Small delay to ensure store is ready
+      setTimeout(() => {
+        // 1. Add IP-detected city (if available)
+        if (detectedTimezone) {
+          const matchingCity = LOCATIONS.find(
+            (loc) => loc.timezone === detectedTimezone.timezone
+          )
+          if (matchingCity) {
+            addCity(matchingCity.id)
+          }
+        }
 
-      if (matchingCity) {
-        // Small delay to ensure store is ready
-        setTimeout(() => {
-          addCity(matchingCity.id)
-        }, 100)
-      }
+        // 2. Add Madrid (if not already added)
+        const madrid = LOCATIONS.find((loc) => loc.id === 'madrid')
+        if (madrid && !selectedCities.includes('madrid')) {
+          // Only add if not same as detected city
+          if (!detectedTimezone || detectedTimezone.timezone !== madrid.timezone) {
+            addCity('madrid')
+          }
+        }
+
+        // 3. Add New York (if not already added)
+        const newYork = LOCATIONS.find((loc) => loc.id === 'new-york')
+        if (newYork && !selectedCities.includes('new-york')) {
+          // Only add if not same as detected city or Madrid
+          if (!detectedTimezone || detectedTimezone.timezone !== newYork.timezone) {
+            addCity('new-york')
+          }
+        }
+      }, 100)
     }
   }, []) // Run only once on mount
 
@@ -309,11 +339,12 @@ export function MultiCityWidget() {
 
       {/* City Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {cities.map((city) => (
+        {cities.map((city, index) => (
           <CityCard
             key={city.id}
             location={city}
             onRemove={() => handleRemoveCity(city.id)}
+            isPrimary={index === 0} // First city is primary (IP-detected)
           />
         ))}
       </div>
