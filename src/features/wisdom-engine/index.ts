@@ -24,6 +24,7 @@ export { WelcomeModal } from './components/WelcomeModal'
 export { MicroPause } from './components/MicroPause'
 export { BreathingExercise } from './components/BreathingExercise'
 export { SavedReflections } from './components/SavedReflections'
+export { TagInput } from './components/TagInput'
 
 // ============================================================================
 // HOOKS

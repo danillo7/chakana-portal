@@ -18,6 +18,7 @@ import {
   Share2,
   Copy,
   Image,
+  Hash,
 } from 'lucide-react'
 import { useWisdomStore } from '../stores/wisdomStore'
 import { exportReflectionsToPDF } from '../services/PDFExporter'
@@ -27,6 +28,7 @@ import {
   downloadInstagramCard,
   copyToClipboard,
 } from '../services/SocialShare'
+import { TagInput } from './TagInput'
 import type { SavedReflection } from '../types/wisdom-engine'
 
 /**
@@ -45,7 +47,9 @@ export function SavedReflections() {
 
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editNote, setEditNote] = useState('')
+  const [editTags, setEditTags] = useState<string[]>([])
   const [filterCategory, setFilterCategory] = useState<string>('all')
+  const [filterTag, setFilterTag] = useState<string | null>(null)
   const [sharingId, setSharingId] = useState<string | null>(null)
 
   // Get unique categories from saved reflections
@@ -56,11 +60,31 @@ export function SavedReflections() {
     return Array.from(uniqueCategories)
   }, [savedReflections])
 
-  // Filter reflections by category
+  // Get all existing tags across all reflections
+  const allTags = useMemo((): string[] => {
+    const tags = new Set<string>()
+    savedReflections.forEach((r: SavedReflection) => {
+      r.tags?.forEach((tag) => tags.add(tag))
+    })
+    return Array.from(tags).sort()
+  }, [savedReflections])
+
+  // Filter reflections by category and tag
   const filteredReflections = useMemo(() => {
-    if (filterCategory === 'all') return savedReflections
-    return savedReflections.filter((r: SavedReflection) => r.quote.category === filterCategory)
-  }, [savedReflections, filterCategory])
+    let filtered = savedReflections
+
+    // Filter by category
+    if (filterCategory !== 'all') {
+      filtered = filtered.filter((r: SavedReflection) => r.quote.category === filterCategory)
+    }
+
+    // Filter by tag
+    if (filterTag) {
+      filtered = filtered.filter((r: SavedReflection) => r.tags?.includes(filterTag))
+    }
+
+    return filtered
+  }, [savedReflections, filterCategory, filterTag])
 
   // Handle delete
   const handleDelete = (id: string) => {
@@ -73,19 +97,25 @@ export function SavedReflections() {
   const handleEditStart = (reflection: SavedReflection) => {
     setEditingId(reflection.id)
     setEditNote(reflection.userNote || '')
+    setEditTags(reflection.tags || [])
   }
 
   // Handle edit save
   const handleEditSave = (id: string) => {
-    updateReflection(id, { userNote: editNote })
+    updateReflection(id, {
+      userNote: editNote,
+      tags: editTags
+    })
     setEditingId(null)
     setEditNote('')
+    setEditTags([])
   }
 
   // Handle edit cancel
   const handleEditCancel = () => {
     setEditingId(null)
     setEditNote('')
+    setEditTags([])
   }
 
   // Handle PDF export
@@ -183,14 +213,17 @@ export function SavedReflections() {
         </p>
       </div>
 
-      {/* Filter */}
-      <div className="mb-6 flex items-center gap-3">
+      {/* Category Filter */}
+      <div className="mb-4 flex items-center gap-3">
         <Filter className="w-5 h-5 text-white/40" />
         <div className="flex gap-2 flex-wrap">
           <button
-            onClick={() => setFilterCategory('all')}
+            onClick={() => {
+              setFilterCategory('all')
+              setFilterTag(null)
+            }}
             className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-              filterCategory === 'all'
+              filterCategory === 'all' && !filterTag
                 ? 'bg-chakana-sage text-white'
                 : 'bg-white/5 text-white/60 hover:bg-white/10'
             }`}
@@ -200,9 +233,12 @@ export function SavedReflections() {
           {categories.map((category: string) => (
             <button
               key={category}
-              onClick={() => setFilterCategory(category)}
+              onClick={() => {
+                setFilterCategory(category)
+                setFilterTag(null)
+              }}
               className={`px-4 py-2 rounded-xl text-sm font-medium capitalize transition-all ${
-                filterCategory === category
+                filterCategory === category && !filterTag
                   ? 'bg-chakana-sage text-white'
                   : 'bg-white/5 text-white/60 hover:bg-white/10'
               }`}
@@ -214,6 +250,49 @@ export function SavedReflections() {
           ))}
         </div>
       </div>
+
+      {/* Tag Filter */}
+      {allTags.length > 0 && (
+        <div className="mb-6 flex items-center gap-3">
+          <Hash className="w-5 h-5 text-white/40" />
+          <div className="flex gap-2 flex-wrap">
+            {allTags.map((tag: string, index: number) => {
+              const count = savedReflections.filter((r: SavedReflection) =>
+                r.tags?.includes(tag)
+              ).length
+
+              // Get tag color from TagInput colors
+              const tagColors = [
+                'bg-chakana-sage/20 text-chakana-sage border-chakana-sage/30 hover:bg-chakana-sage/30',
+                'bg-chakana-mint/20 text-chakana-mint border-chakana-mint/30 hover:bg-chakana-mint/30',
+                'bg-chakana-gold/20 text-chakana-gold border-chakana-gold/30 hover:bg-chakana-gold/30',
+                'bg-purple-500/20 text-purple-400 border-purple-500/30 hover:bg-purple-500/30',
+                'bg-blue-500/20 text-blue-400 border-blue-500/30 hover:bg-blue-500/30',
+                'bg-pink-500/20 text-pink-400 border-pink-500/30 hover:bg-pink-500/30',
+              ]
+              const colorClass = tagColors[index % tagColors.length]
+
+              return (
+                <button
+                  key={tag}
+                  onClick={() => {
+                    setFilterTag(filterTag === tag ? null : tag)
+                    setFilterCategory('all')
+                  }}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all flex items-center gap-1.5 ${
+                    filterTag === tag
+                      ? colorClass + ' ring-2 ring-offset-2 ring-offset-chakana-dark'
+                      : colorClass
+                  }`}
+                >
+                  <Hash className="w-3 h-3" />
+                  {tag} ({count})
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Reflections List */}
       <div className="space-y-4">
@@ -250,19 +329,41 @@ export function SavedReflections() {
                 )}
               </div>
 
-              {/* User Note Section */}
+              {/* User Note & Tags Section */}
               <div className="mb-4">
                 {editingId === reflection.id ? (
                   /* Edit Mode */
-                  <div className="space-y-3">
-                    <textarea
-                      value={editNote}
-                      onChange={(e) => setEditNote(e.target.value)}
-                      placeholder="Añade tus reflexiones personales..."
-                      className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white placeholder-white/40 focus:outline-none focus:border-chakana-sage resize-none"
-                      rows={3}
-                      autoFocus
-                    />
+                  <div className="space-y-4">
+                    {/* Note Textarea */}
+                    <div>
+                      <label className="block text-xs font-medium text-white/60 mb-2">
+                        📝 Notas Personales
+                      </label>
+                      <textarea
+                        value={editNote}
+                        onChange={(e) => setEditNote(e.target.value)}
+                        placeholder="Añade tus reflexiones personales..."
+                        className="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-white placeholder-white/40 focus:outline-none focus:border-chakana-sage resize-none"
+                        rows={3}
+                        autoFocus
+                      />
+                    </div>
+
+                    {/* Tag Input */}
+                    <div>
+                      <label className="block text-xs font-medium text-white/60 mb-2">
+                        🏷️ Etiquetas
+                      </label>
+                      <TagInput
+                        tags={editTags}
+                        existingTags={allTags}
+                        onChange={setEditTags}
+                        placeholder="Añadir etiqueta..."
+                        maxTags={5}
+                      />
+                    </div>
+
+                    {/* Action Buttons */}
                     <div className="flex gap-2">
                       <button
                         onClick={() => handleEditSave(reflection.id)}
@@ -282,7 +383,8 @@ export function SavedReflections() {
                   </div>
                 ) : (
                   /* View Mode */
-                  <div>
+                  <div className="space-y-3">
+                    {/* User Note */}
                     {reflection.userNote ? (
                       <div className="bg-white/5 rounded-xl p-4 border border-white/10">
                         <p className="text-sm text-white/80 leading-relaxed">
@@ -298,6 +400,37 @@ export function SavedReflections() {
                       <p className="text-sm text-white/40 italic">
                         Sin notas personales aún
                       </p>
+                    )}
+
+                    {/* Tags Display */}
+                    {reflection.tags && reflection.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-2">
+                        {reflection.tags.map((tag: string, index: number) => {
+                          const tagColors = [
+                            'bg-chakana-sage/20 text-chakana-sage border-chakana-sage/30',
+                            'bg-chakana-mint/20 text-chakana-mint border-chakana-mint/30',
+                            'bg-chakana-gold/20 text-chakana-gold border-chakana-gold/30',
+                            'bg-purple-500/20 text-purple-400 border-purple-500/30',
+                            'bg-blue-500/20 text-blue-400 border-blue-500/30',
+                            'bg-pink-500/20 text-pink-400 border-pink-500/30',
+                          ]
+                          const colorClass = tagColors[index % tagColors.length]
+
+                          return (
+                            <button
+                              key={tag}
+                              onClick={() => {
+                                setFilterTag(tag)
+                                setFilterCategory('all')
+                              }}
+                              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border ${colorClass} hover:shadow-sm transition-all cursor-pointer`}
+                            >
+                              <Hash className="w-3 h-3" />
+                              <span>{tag}</span>
+                            </button>
+                          )
+                        })}
+                      </div>
                     )}
                   </div>
                 )}
