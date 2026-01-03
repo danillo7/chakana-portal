@@ -25,6 +25,7 @@ export { MicroPause } from './components/MicroPause'
 export { BreathingExercise } from './components/BreathingExercise'
 export { SavedReflections } from './components/SavedReflections'
 export { TagInput } from './components/TagInput'
+export { AnalyticsDashboard } from './components/AnalyticsDashboard'
 
 // ============================================================================
 // HOOKS
@@ -55,6 +56,14 @@ export {
 } from './services/SocialShare'
 export { supabaseSync } from './services/SupabaseSync'
 export type { SyncStatus, SyncResult } from './services/SupabaseSync'
+export { analytics } from './services/Analytics'
+export type {
+  CategoryStats,
+  TagStats,
+  DailyActivity,
+  AuthorStats,
+  AnalyticsSummary,
+} from './services/Analytics'
 
 // ============================================================================
 // TYPES
