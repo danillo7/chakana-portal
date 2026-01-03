@@ -161,6 +161,10 @@ export function MultiCityWidget() {
         // 3. Always try to add New York
         // addCity() will skip if already added or if limit reached
         addCity('new-york')
+
+        // 4. Fallback: Add São Paulo to ensure 3 cities
+        // This handles cases where IP-detected city is Madrid or New York (duplicates)
+        addCity('sao-paulo')
       }, 100)
     }
   }, []) // Run only once on mount
